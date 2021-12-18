@@ -4,7 +4,7 @@ from . import jbSearch
 from . import jbSelect
 
 # ===================================================================
-#  Look inside the current payload and display its contents
+#  Look inside the current payload and display its contents.
 # ===================================================================
 def lookf( ins ):
     if jbSearch.payload == None or "issues" not in jbSearch.payload:
@@ -22,10 +22,18 @@ def lookf( ins ):
         if '*' in cols:
             cols.remove( '*' )
 
+    # Flatten the results according to the columns and print the results.
+    results = flattenf( jbSearch.payload, cols )
+    print( json.dumps( results, indent=4, sort_keys=True ) )
+
+# ============================================================================
+#  Flattens the Jira payload into a simpler model you can manipulate easier.
+# ============================================================================
+def flattenf( payload, cols ):
     results = list()
 
-    # Iterate the results...
-    for item in jbSearch.payload["issues"]:
+    # Iterate the issues in the payload ...
+    for item in payload["issues"]:
         row = dict()
         results.append( row )
 
@@ -63,5 +71,5 @@ def lookf( ins ):
 
             # Whatever we got, put it in the results ...
             row[col] = obj
-        
-    print( json.dumps( results, indent=4, sort_keys=True ) )
+
+    return results

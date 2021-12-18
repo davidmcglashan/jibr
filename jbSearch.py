@@ -34,9 +34,6 @@ def searchf( ins ):
     if jbSelect.columns() != "*":
         url = url + "&fields=" + jbSelect.columns()
 
-    # Do we need a where parameter?
-#    url = brWhere.appendToURL( url )
-
     print( url )
 
     # Make the HTTP request and get back a response
