@@ -56,8 +56,8 @@ def searchf( ins ):
             payload = json.loads(data.decode("utf-8"))
 
             # If there's a JSON callback, then call it.
-            #if jsonCb != None:
-            #    jsonCb( brHost.perspective, payload )
+            if jsonCb != None:
+                jsonCb( url, payload )
 
             if jbEcho.echo:
                 print( json.dumps( payload, indent=4, sort_keys=True ) )
@@ -68,8 +68,8 @@ def searchf( ins ):
                 print( "1 record retrieved" )
 
 # ===================================================================
-#  Pass in a function to become the JSON callback for GET requests.
+#  Pass in a function to become the JSON callback for searches.
 # ===================================================================
-def jsonCallback( cb ):
+def searchCallback( cb ):
     global jsonCb
     jsonCb = cb
