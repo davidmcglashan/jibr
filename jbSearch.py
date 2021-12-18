@@ -23,17 +23,8 @@ def searchf( ins ):
     if len(ins) == 0:
         return
 
-    conn = http.client.HTTPSConnection( jbHost.url() )
-
-    # One parameter means a single record GET but the value is in a variable?
-    if len(ins) == 1:
-        url = "/rest/api/2/search?jql=%s" % jqlParse.parse( ins[0] )
-
-    # Don't understand any other kind of GET at the moment!
-    else:
-        print( "GET not understood." )
-        print( ins )
-        return
+    conn = http.client.HTTPSConnection( jbHost.host() )
+    url = "/rest/api/2/search?jql=%s" % jqlParse.parse(ins)
 
     global previousIns
     previousIns = ins

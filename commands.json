@@ -12,9 +12,9 @@
     {
         "name": "Jira host configuration and authentication",
         "commands": {
-            "host": "jbHost.hostf",
+            "hostname": "jbHost.hostnamef",
             "port": "jbHost.portf",
-            "url": "jbHost.urlf",
+            "host": "jbHost.hostf",
             "token": "jbHost.token"
         }
     },

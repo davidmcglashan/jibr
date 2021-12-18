@@ -1,2 +1,3 @@
 def parse( ins ):
-	return ins.replace('=','%3d')
+    query = "%20".join(ins)
+    return query.replace('=','%3d')

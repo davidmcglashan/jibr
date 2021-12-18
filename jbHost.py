@@ -1,17 +1,17 @@
-host = None
+hostname = None
 port = 80
 accessToken = "No Access Token"
 
 # =======================================
 # Print or set the host
 # =======================================
-def hostf( ins ):
-    global host
+def hostnamef( ins ):
+    global hostname
 
     if len(ins) == 1: 
-        host = ins[0]
+        hostname = ins[0]
 
-    print( "Host name is %s" % host )
+    print( "Host name is %s" % hostname )
 
 # =======================================
 # Print or set the port number
@@ -27,14 +27,14 @@ def portf( ins ):
 # =======================================
 # Print the URL
 # =======================================
-def urlf( ins ):
-    print( url() )
+def hostf( ins ):
+    print( host() )
 
 # =======================================
 # Return the URL
 # =======================================
-def url():
-    return "%s:%s" % (host,port)
+def host():
+    return "%s:%s" % (hostname,port)
 
 # ===================================
 # Print or set the current access token

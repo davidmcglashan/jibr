@@ -1,4 +1,4 @@
-echo = True
+echo = False
 
 # ===================================
 # Echo on/off/report
