@@ -29,10 +29,13 @@
     {
         "name": "Quick searching with JQL",
         "commands": {
-            "search":   "jbSearch.searchf",
-            "?":        "jbSearch.searchf",
-            "select":   "jbSelect.columnsf",
-            "look":     "jbLook.lookf"
+            "search":       "jbSearch.searchf",
+            "?":            "jbSearch.searchf",
+            "startat":      "jbSearch.startAtf",
+            "maxresults":   "jbSearch.maxResultsf",
+            "payload":      "jbSearch.payloadf",
+            "select":       "jbSelect.columnsf",
+            "look":         "jbLook.lookf"
         }
     }
 ]
