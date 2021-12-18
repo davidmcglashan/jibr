@@ -66,7 +66,7 @@ def searchf( ins ):
                 print( "%s records retrieved (out of %s)" % (len(payload["issues"]),payload["total"]) )
             else:
                 print( "1 record retrieved" )
- 
+
 # ===================================================================
 #  Pass in a function to become the JSON callback for GET requests.
 # ===================================================================
