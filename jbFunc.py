@@ -1,5 +1,6 @@
 import os
 import json
+from json import JSONDecodeError
 import importlib
 
 from inspect import signature
@@ -32,7 +33,10 @@ try:
 
 except( FileNotFoundError ):
     print( "commands.json file not found!" )
-
+    exit()
+except( JSONDecodeError ):
+    print( "Something wrong with commands.json. Check its JSON structure is okay." )
+    exit()
 
 # ===================================
 # Parse user input
