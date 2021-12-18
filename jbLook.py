@@ -19,6 +19,8 @@ def lookf( ins ):
         cols.update( jbSelect.columns().split( "," ) )
         if 'id' in cols:
             cols.remove( 'id' )
+        if '*' in cols:
+            cols.remove( '*' )
 
     results = list()
 
@@ -35,7 +37,7 @@ def lookf( ins ):
                 obj = item[col]
 
             # ... or in the "fields" object.
-            elif col in item["fields"]:
+            elif "fields" in item and col in item["fields"]:
                 obj = item["fields"][col]
 
             # Found nothing? Never mind. 

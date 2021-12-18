@@ -6,8 +6,6 @@ cols = "*"
 # Return the current column confifguration as a string.
 # ====================================================
 def columns():
-    if cols == "*":
-        return "id,key"
     return cols
 
 # ==================================================

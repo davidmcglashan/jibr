@@ -19,20 +19,22 @@ jsonCb = None
 # Perform a REST API get
 # =======================================
 def searchf( ins ):
+    global previousIns
+
     # No params means nothing to do
     if len(ins) == 0:
-        return
+        ins = previousIns
 
     conn = http.client.HTTPSConnection( jbHost.host() )
     url = "/rest/api/2/search?jql=%s" % jqlParse.parse(ins)
-
-    global previousIns
     previousIns = ins
 
     # Always do page size, even if it's the default.
 #    url = brPage.appendToURL( url )
 
-    url = url + "&fields=" + jbSelect.columns()
+    # Include fields to restrict the columns being selected.
+    if jbSelect.columns() != "*":
+        url = url + "&fields=" + jbSelect.columns()
 
     # Do we need a where parameter?
 #    url = brWhere.appendToURL( url )
