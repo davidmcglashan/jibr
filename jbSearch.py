@@ -79,7 +79,7 @@ def startAtf( ins ):
     print( "Results will start at %s" % startAt )
 
 # =======================================
-# Print or set the start at number
+# Print or set the number of results
 # =======================================
 def maxResultsf( ins ):
     global maxResults
