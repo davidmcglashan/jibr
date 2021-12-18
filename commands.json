@@ -1,0 +1,34 @@
+[
+    {
+        "name": "System Commands",
+        "commands": {
+            "help": "jbHelp.help",
+            "echo": "jbEcho.echof",
+            "quit": "jbFunc.quit",
+            "q": "jbFunc.quit"
+        }
+    },
+
+    {
+        "name": "Authentication",
+        "commands": {
+            "login": "jbAuth.auth"
+        }
+    },
+
+    {
+        "name": "REST API & remote configuration",
+        "commands": {
+            "host": "jbHost.hostf",
+            "api": "jbHost.apif",
+            "version": "jbHost.versionf"
+        }
+    },
+
+    {
+        "name": "Executing a script file",
+        "commands": {
+            "script": "jbScript.script"
+        }
+    }
+]

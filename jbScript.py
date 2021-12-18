@@ -8,7 +8,7 @@ def script(ins):
     if len(ins) == 0:
         return
 
-    # If the passed in filename doesn't contain a '.' put a '.breather' on the end of the filename.
+    # If the passed in filename doesn't contain a '.' put a '.jibr' on the end of the filename.
     filename = ins[0]
     if '.' not in filename:
         filename = filename + ".jibr"
@@ -24,7 +24,7 @@ def script(ins):
 
                 # Comments are ignored. Everything is passed to the brFunc parser to be executed.
                 elif line[0] != "#":
-                    brFunc.parse( line.rstrip() )
+                    jbFunc.parse( line.rstrip() )
 
             print( filename + ": finished" )
     except( FileNotFoundError ):
