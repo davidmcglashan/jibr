@@ -24,5 +24,12 @@
         "commands": {
             "script": "jbScript.script"
         }
+    },
+
+    {
+        "name": "Quick searching with JQL",
+        "commands": {
+            "search": "jbSearch.searchf"
+        }
     }
 ]
