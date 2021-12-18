@@ -20,8 +20,8 @@
         "name": "REST API & remote configuration",
         "commands": {
             "host": "jbHost.hostf",
-            "api": "jbHost.apif",
-            "version": "jbHost.versionf"
+            "port": "jbHost.portf",
+            "url": "jbHost.url"
         }
     },
 

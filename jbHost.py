@@ -1,15 +1,5 @@
-import json
-import http.client
-import re
-from json import JSONDecodeError
-
-from . import jbAuth 
-from . import jbEcho
-
 host = None
-api = None
-version = None
-perspective = None
+port = 80
 
 # =======================================
 # Print or set the host
@@ -23,24 +13,24 @@ def hostf( ins ):
     print( "Host name is %s" % host )
 
 # =======================================
-# Print or set the API
+# Print or set the port number
 # =======================================
-def apif( ins ):
-    global api
+def portf( ins ):
+    global port
 
     if len(ins) == 1: 
-        api = ins[0]
+        port = ins[0]
 
-    print( "API is %s" % api )
+    print( "Post number is %s" % port )
 
 # =======================================
-# Print or set the version
+# Print the URL
 # =======================================
-def versionf( ins ):
-    global version
+def url( ins ):
+    print( urlf() )
 
-    if len(ins) == 1: 
-        version = ins[0]
-
-    print( "Version is %s" % version )
-
+# =======================================
+# Return the URL
+# =======================================
+def urlf():
+    return "https://%s:%s/" % (host,port)
