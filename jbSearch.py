@@ -2,11 +2,11 @@ import http.client
 import json
 
 #from . import brAuth
-#from . import brColumns
 from . import jbEcho
 #from . import brPage
 from . import jbHost
 from . import jbResponse
+from . import jbSelect
 from . import jqlParse
 #from . import brVar 
 #from . import brWhere
@@ -32,11 +32,7 @@ def searchf( ins ):
     # Always do page size, even if it's the default.
 #    url = brPage.appendToURL( url )
 
-    # Do we need a select parameter?
-    url = url + "&fields=id,key"
-
-#    if brColumns.columns( perspective=subPers ) != "*":
-#        url = url + "&select=%s" % brColumns.columns( perspective=subPers )
+    url = url + "&fields=" + jbSelect.columns()
 
     # Do we need a where parameter?
 #    url = brWhere.appendToURL( url )
@@ -67,7 +63,7 @@ def searchf( ins ):
                 print( json.dumps( payload, indent=4, sort_keys=True ) )
 
             if "issues" in payload:
-                print( "%s records retrieved" % len(payload["issues"]) )
+                print( "%s records retrieved (out of %s)" % (len(payload["issues"]),payload["total"]) )
             else:
                 print( "1 record retrieved" )
  

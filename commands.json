@@ -29,7 +29,8 @@
     {
         "name": "Quick searching with JQL",
         "commands": {
-            "search": "jbSearch.searchf"
+            "search": "jbSearch.searchf",
+            "select": "jbSelect.columnsf"
         }
     }
 ]
