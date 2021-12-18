@@ -10,18 +10,12 @@
     },
 
     {
-        "name": "Authentication",
-        "commands": {
-            "login": "jbAuth.auth"
-        }
-    },
-
-    {
-        "name": "REST API & remote configuration",
+        "name": "Jira host configuration and authentication",
         "commands": {
             "host": "jbHost.hostf",
             "port": "jbHost.portf",
-            "url": "jbHost.url"
+            "url": "jbHost.urlf",
+            "token": "jbHost.token"
         }
     },
 

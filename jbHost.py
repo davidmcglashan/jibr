@@ -1,5 +1,6 @@
 host = None
 port = 80
+accessToken = "No Access Token"
 
 # =======================================
 # Print or set the host
@@ -26,11 +27,23 @@ def portf( ins ):
 # =======================================
 # Print the URL
 # =======================================
-def url( ins ):
-    print( urlf() )
+def urlf( ins ):
+    print( url() )
 
 # =======================================
 # Return the URL
 # =======================================
-def urlf():
-    return "https://%s:%s/" % (host,port)
+def url():
+    return "%s:%s" % (host,port)
+
+# ===================================
+# Print or set the current access token
+# ===================================
+def token( ins ):
+    global accessToken
+
+    if len(ins) == 1: 
+        accessToken = "Bearer " + ins[0]
+
+    print( accessToken[0:20] + '...')
+    
