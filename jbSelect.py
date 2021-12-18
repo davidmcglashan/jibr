@@ -1,6 +1,6 @@
 import re
 
-cols = "*"
+cols = "id,key"
 
 # ====================================================
 # Return the current column confifguration as a string.
