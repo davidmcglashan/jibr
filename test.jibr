@@ -1,0 +1,41 @@
+help
+help help
+help echo
+
+echo on
+echo off
+
+hosstname
+hostname foo
+hostname
+
+port
+port 19
+port
+
+token
+token blahblah
+token
+
+maxresults
+maxresults 1
+maxresults
+
+startat
+startat 1
+startat
+
+select
+select key
+select
+select + summary
+select
+select - key
+select
+select --
+select
+
+payload
+look
+count
+count key
