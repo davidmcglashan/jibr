@@ -1,0 +1,12 @@
+payloads
+- save
+- append
+- export
+
+issues
+- open in Jira (web)
+
+fields
+- know what custom fields are
+- use in select
+- use in where
