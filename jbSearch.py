@@ -63,6 +63,28 @@ def searchf( ins ):
             else:
                 print( "1 record retrieved" )
 
+# =======================================
+# Print or set the start at number
+# =======================================
+def startAtf( ins ):
+    global startAt
+
+    if len(ins) == 1: 
+        startAt = ins[0]
+
+    print( "Results will start at %s" % startAt )
+
+# =======================================
+# Print or set the start at number
+# =======================================
+def maxResultsf( ins ):
+    global maxResults
+
+    if len(ins) == 1: 
+        maxResults = ins[0]
+
+    print( "Max results returned will be %s" % maxResults )
+
 # ===================================================================
 #  Pass in a function to become the JSON callback for searches.
 # ===================================================================
