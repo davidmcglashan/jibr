@@ -13,12 +13,19 @@ def set( pl ):
 # Show the full payload
 # =======================================
 def payloadf():
-    print( json.dumps( payload, indent=4, sort_keys=True ) )
+    if payload == None:
+        print( "There is no payload. Try doing a search!" )
+    else:
+        print( json.dumps( payload, indent=4, sort_keys=True ) )
 
 # ============================================================================
 #  Flattens the Jira payload into a simpler model you can manipulate easier.
 # ============================================================================
 def flattenf( cols ):
+    if payload == None:
+        print( "There is no payload. Try doing a search!" )
+        return
+
     results = list()
 
     # Iterate the issues in the payload ...

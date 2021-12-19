@@ -3,11 +3,17 @@ from . import jbPayload
 import json
 
 def countf( ins ):
+    if len(ins) == 0:
+        print( "Nothing to count by." )
+        return
+
     column = ins[0]
 
     # Flatten the payload first.
     results = jbPayload.flattenf( {column} )
-
+    if results == None:
+        return
+        
     counts = dict()
     for result in results:
         # Get the value ...

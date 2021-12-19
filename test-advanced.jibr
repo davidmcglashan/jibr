@@ -1,0 +1,10 @@
+script default.jibr
+
+? project = qrk
+payload
+look key
+count key
+
+select assignee, status, summary
+? project = riskx
+look
