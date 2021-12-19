@@ -33,7 +33,6 @@
             "?":            "jbSearch.searchf",
             "startat":      "jbSearch.startAtf",
             "maxresults":   "jbSearch.maxResultsf",
-            "payload":      "jbSearch.payloadf",
             "select":       "jbSelect.columnsf"
         }
     },
@@ -41,6 +40,7 @@
     {
         "name": "Analysing payloads",
         "commands": {
+            "payload":      "jbPayload.payloadf",
             "look":         "jbLook.lookf",
             "count":        "jbCount.countf"
         }

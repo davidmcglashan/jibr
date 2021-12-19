@@ -1,5 +1,4 @@
-from . import jbLook
-from . import jbSearch
+from . import jbPayload
 
 import json
 
@@ -7,7 +6,7 @@ def countf( ins ):
     column = ins[0]
 
     # Flatten the payload first.
-    results = jbLook.flattenf( jbSearch.payload, {column} )
+    results = jbPayload.flattenf( {column} )
 
     counts = dict()
     for result in results:

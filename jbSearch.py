@@ -6,9 +6,9 @@ from . import jbHost
 from . import jbResponse
 from . import jbSelect
 from . import jqlParse
+from . import jbPayload
 
 previousIns = []
-payload = None
 jsonCb = None
 maxResults = 50
 startAt = 0
@@ -49,48 +49,19 @@ def searchf( ins ):
         if data is None:
             print( "Nope data" )
         else:
-            global payload
-            payload = json.loads(data.decode("utf-8"))
+            jbPayload.set( json.loads(data.decode("utf-8")) )
 
             # If there's a JSON callback, then call it.
             if jsonCb != None:
-                jsonCb( url, payload )
+                jsonCb( url, jbPayload.payload )
 
             if jbEcho.echo:
                 payloadf()
 
-            if "issues" in payload:
-                print( "%s records retrieved (out of %s)" % (len(payload["issues"]),payload["total"]) )
+            if "issues" in jbPayload.payload:
+                print( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
             else:
                 print( "1 record retrieved" )
-
-# =======================================
-# Print or set the start at number
-# =======================================
-def startAtf( ins ):
-    global startAt
-
-    if len(ins) == 1: 
-        startAt = ins[0]
-
-    print( "Results will start at %s" % startAt )
-
-# =======================================
-# Print or set the number of results
-# =======================================
-def maxResultsf( ins ):
-    global maxResults
-
-    if len(ins) == 1: 
-        maxResults = ins[0]
-
-    print( "Max results returned will be %s" % maxResults )
-
-# =======================================
-# Show the full payload
-# =======================================
-def payloadf():
-    print( json.dumps( payload, indent=4, sort_keys=True ) )
 
 # ===================================================================
 #  Pass in a function to become the JSON callback for searches.
