@@ -56,7 +56,7 @@ def searchf( ins ):
                 jsonCb( url, jbPayload.payload )
 
             if jbEcho.echo:
-                payloadf()
+                jbPayload.payloadf()
 
             if "issues" in jbPayload.payload:
                 print( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
