@@ -26,7 +26,7 @@ def getf( ins ):
     if len(ins) == 1 and ins[0] == 'get':
         conn = http.client.HTTPSConnection( jbHost.host() )
         url = "/rest/api/2/field"
-        if jbEcho.level == 3:
+        if jbEcho.level > 1:
             print( url )
 
         # Make the HTTP request and get back a response
@@ -65,7 +65,7 @@ def getf( ins ):
         if jbEcho.level == 3:
             print( json.dumps( fields, indent=4, sort_keys=True ) )
         
-        if jbEcho.level > 1:
+        if jbEcho.level > 0:
             print( "%s fields loaded" % len(idToPretty) )
 
         if callback != None:
