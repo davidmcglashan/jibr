@@ -1,4 +1,7 @@
 from . import jbEcho
+from . import jbPayload
+from . import jbSearch
+from . import jbParse
 
 import webbrowser
 
@@ -65,8 +68,15 @@ def jiraf( ins ):
             print( "Nothing to open" )
         return
 
+    # The 'search' keyword opens a Jira search URL
+    if len(ins) == 1 and ins[0] == 'search':
+        url = "https://%s:%s/issues/?jql=%s" % (hostname,port,jbParse.parse(jbSearch.previousIns))
+        if jbEcho.level > 1:
+            print( url )
+        webbrowser.open( url )
+
     # 1 key we can open directly on the record.
-    if len(ins) == 1:
+    elif len(ins) == 1:
         url = "https://%s:%s/browse/%s" % (hostname,port,ins[0])
         if jbEcho.level > 1:
             print( url )
