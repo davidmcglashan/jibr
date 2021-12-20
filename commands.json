@@ -24,7 +24,8 @@
     {
         "name": "Executing a script file",
         "commands": {
-            "script": "jbScript.script"
+            "script":   "jbScript.script",
+            "x":        "jbScript.script"
         }
     },
 
