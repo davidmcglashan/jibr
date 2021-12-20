@@ -6,6 +6,7 @@ from . import jbHost
 from . import jbResponse
 
 fields = None
+callback = None
 
 # ===============================================
 # Perform a REST API get on the fields endpoint.
@@ -42,6 +43,8 @@ def getf( ins ):
     if jbEcho.level > 1:
         print( "%s fields loaded" % len(fields) )
 
+    if callback != None:
+        callback( fields )
 
 # =======================================================================================
 # Look up a single field's posh name. Returns the dull name if the posh one isn't found.
@@ -50,3 +53,10 @@ def lookup( str ):
     if fields == None or str not in fields:
         return str
     return fields[str]
+
+# =======================================================================
+#  Pass in a function to become the callback for when fields are loaded.
+# =======================================================================
+def fieldsCallback( cb ):
+    global callback
+    callback = cb
