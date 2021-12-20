@@ -84,10 +84,19 @@ def easify( str ):
 # =======================================================================================
 # Look up a single field's posh name. Returns the dull name if the posh one isn't found.
 # =======================================================================================
-def lookup( str ):
-    if fields == None or str not in fields:
+def findPrettyById( str ):
+    if fields == None or fields["idToPretty"] == None or str not in fields["idToPretty"]:
         return str
-    return fields[str]
+    return fields["idToPretty"][str]
+
+# =======================================================================================
+# Look up a single field's id using its easy to type version. Returns the passed in
+# string in the event of failure.
+# =======================================================================================
+def findIdByEasy( str ):
+    if fields == None or fields["easyToType"] == None or str not in fields["easyToType"]:
+        return str
+    return fields["easyToType"][str]
 
 # =======================================================================
 #  Pass in a function to become the callback for when fields are loaded.

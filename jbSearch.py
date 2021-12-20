@@ -31,8 +31,7 @@ def searchf( ins ):
     url = url + "&maxResults=%s&startAt=%s" % ( maxResults, startAt )
 
     # Include fields to restrict the columns being selected.
-    if jbSelect.columns() != "*":
-        url = url + "&fields=" + jbSelect.columns()
+    url = jbSelect.appendToUrl( url )
 
     if jbEcho.level > 1:
         print( url )

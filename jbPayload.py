@@ -40,16 +40,17 @@ def flattenf( cols ):
         results.append( row )
 
         # Iterate the passed in columns.
-        for col in cols:
+        for col_ez in cols:
+            col_id = jbFields.findIdByEasy( col_ez )
             obj = None
 
             # Look for the passed in string in the record ... 
-            if col in issue:
-                obj = issue[col]
+            if col_id in issue:
+                obj = issue[col_id]
 
             # ... or in the record's "fields" object.
-            elif "fields" in issue and col in issue["fields"]:
-                obj = issue["fields"][col]
+            elif "fields" in issue and col_id in issue["fields"]:
+                obj = issue["fields"][col_id]
 
             # Found nothing? Never mind. 
             if obj == None:
@@ -75,6 +76,6 @@ def flattenf( cols ):
                     obj = obj["id"]
 
             # Whatever we got, put it in the results ...
-            row[ jbFields.lookup(col) ] = obj
+            row[ jbFields.findPrettyById(col_id) ] = obj
 
     return results

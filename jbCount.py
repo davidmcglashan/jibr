@@ -10,8 +10,8 @@ def countf( ins ):
             print( "Nothing to count by." )
         return
 
-    column = ins[0]
-    fcol = jbFields.lookup(column)
+    column = jbFields.findIdByEasy(ins[0])
+    fcol = jbFields.findPrettyById(column)
 
     # Flatten the payload first.
     results = jbPayload.flattenf( {column} )

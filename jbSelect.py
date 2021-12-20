@@ -1,4 +1,5 @@
 from . import jbEcho
+from . import jbFields
 
 import re
 
@@ -9,6 +10,23 @@ cols = "id,key"
 # ====================================================
 def columns():
     return cols
+
+# ====================================================
+# Append the current column selection to a search URL
+# ====================================================
+def appendToUrl( url ):
+    # select * does nothing to the URL
+    if cols == "*":
+        return
+
+    # otherwise, append something ...
+    url = url + "&fields="
+
+    ids = list()
+    for col in cols.split(","):
+        ids.append( jbFields.findIdByEasy( col ) )
+
+    return url + ",".join( ids )
 
 # ==================================================
 # Print or set the columns that will be selected
