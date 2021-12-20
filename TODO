@@ -1,5 +1,4 @@
 fields
-- deal with spaces - might just be _ and hope for no collisions!
 - use in select
 - use in where
 

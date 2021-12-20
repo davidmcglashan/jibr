@@ -6,8 +6,7 @@
             "echo":     "jbEcho.echof",
             "quit":     "jbFunc.quit",
             "q":        "jbFunc.quit",
-            "test":     "jbScript.test",
-            "fields":   "jbFields.getf"
+            "test":     "jbScript.test"
         }
     },
 
@@ -26,6 +25,13 @@
         "commands": {
             "script":   "jbScript.script",
             "x":        "jbScript.script"
+        }
+    },
+
+    {
+        "name": "Fields and columns",
+        "commands": {
+            "fields":   "jbFields.getf"
         }
     },
 
