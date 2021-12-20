@@ -29,15 +29,9 @@ def handleResponse( response ):
         print( s )
 
     # The response might contain a JSON string we can use as an error message
-    if jbEcho.echo:
-        data = response.read()
-        if data is not None:
-            try:
-                jdata = json.loads(data.decode("utf-8"))
-                print( json.dumps( jdata, indent=4, sort_keys=True ) )
-            except( JSONDecodeError ):
-                print( "There was no JSON to parse" )
-                print( data )
-
+    print( response.getheaders() )
+    data = response.read()
+    if data is not None:
+        print( data.decode("utf-8") )
 
     return False
