@@ -12,53 +12,64 @@ callback = None
 # Perform a REST API get on the fields endpoint.
 # ===============================================
 def getf( ins ):
-    conn = http.client.HTTPSConnection( jbHost.host() )
-    url = "/rest/api/2/field"
-    if jbEcho.level == 3:
-        print( url )
+    global fields
 
-    # Make the HTTP request and get back a response
-    headers = {
-        "Authorization": jbHost.accessToken
-    }
-    conn.request( "GET", url, headers=headers)
-    response = conn.getresponse()
+    # No params means display the current fields maps.
+    if len(ins) == 0:
+        if jbEcho.level > 0:
+            if fields != None:
+                print( json.dumps( fields, indent=4, sort_keys=True ) )
+            else:
+                print( "Fields have not been loaded yet.")
+        return
 
-    # Is the response a good one? If so, dump the JSON.
-    if jbResponse.handleResponse( response ):
-        data = response.read()
+    if len(ins) == 1 and ins[0] == 'get':
+        conn = http.client.HTTPSConnection( jbHost.host() )
+        url = "/rest/api/2/field"
+        if jbEcho.level == 3:
+            print( url )
 
-        # No data? Never mind ...
-        if data is None:
-            print( "Nope data" )
+        # Make the HTTP request and get back a response
+        headers = {
+            "Authorization": jbHost.accessToken
+        }
+        conn.request( "GET", url, headers=headers)
+        response = conn.getresponse()
+
+        # Is the response a good one? If so, dump the JSON.
+        if jbResponse.handleResponse( response ):
+            data = response.read()
+
+            # No data? Never mind ...
+            if data is None:
+                print( "Nope data" )
+            
+            else:
+                fs = json.loads( data.decode("utf-8") )
+
+                # Set the storage up.
+                fields = dict()
+                idToPretty = dict()
+                easyToType = dict()
+                fields["idToPretty"] = idToPretty
+                fields["easyToType"] = easyToType
+
+                for field in fs:
+                    # Map the field IDs to their pretty names.
+                    idToPretty[field["id"]] = field["name"]
+
+                    # Map the easy to type names to the IDs
+                    easyToType[ easify( field["name"] ) ] = field["id"]
+
+        # Display the findings where appropriate.
+        if jbEcho.level == 3:
+            print( json.dumps( fields, indent=4, sort_keys=True ) )
         
-        else:
-            fs = json.loads( data.decode("utf-8") )
+        if jbEcho.level > 1:
+            print( "%s fields loaded" % len(idToPretty) )
 
-            # Set the storage up.
-            global fields
-            fields = dict()
-            idToPretty = dict()
-            easyToType = dict()
-            fields["idToPretty"] = idToPretty
-            fields["easyToType"] = easyToType
-
-            for field in fs:
-                # Map the field IDs to their pretty names.
-                idToPretty[field["id"]] = field["name"]
-
-                # Map the easy to type names to the IDs
-                easyToType[ easify( field["name"] ) ] = field["id"]
-
-    # Display the findings where appropriate.
-    if jbEcho.level == 3:
-        print( json.dumps( fields, indent=4, sort_keys=True ) )
-    
-    if jbEcho.level > 1:
-        print( "%s fields loaded" % len(idToPretty) )
-
-    if callback != None:
-        callback( fields )
+        if callback != None:
+            callback( fields )
 
 # =======================================================================================
 # Converts the pretty name of a field into something easy to type.
