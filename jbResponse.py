@@ -8,7 +8,7 @@ from . import jbEcho
 def handleResponse( response ):
     # No response is rather drastic.
     if response is None:
-        if jbEcho > 1:
+        if jbEcho.level > 1:
             print( "No response" )
         return False
     
@@ -17,7 +17,7 @@ def handleResponse( response ):
         return True
 
     # If we're muted just return False, otherwise do some printing ...
-    if jbEcho == 0:
+    if jbEcho.level == 0:
         return False
 
     # 4xx codes need a quick error message. Maybe some debug ...
@@ -34,7 +34,7 @@ def handleResponse( response ):
     # The response might contain something useful we can use as an error message.
     print( response.getheaders() )
     data = response.read()
-    if data is not None and jbEcho > 1:
+    if data is not None and jbEcho.level > 1:
         print( data.decode("utf-8") )
 
     return False
