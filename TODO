@@ -1,8 +1,3 @@
-open in jira
-- jira key - open an issue
-- jira payload - open the payload's keys in a search: key in ()
-- jira search - open the search in jira
-
 buckets
 - bucket by 'field'
 - bucket by 'field field field'
@@ -30,6 +25,7 @@ payloads
 - append
 - export json
 - export csv (excel)
+- jira payload - open the payload's keys in a search: key in ()
 
 arrays and vars
 - setting from payload
