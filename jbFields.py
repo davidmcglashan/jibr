@@ -8,6 +8,9 @@ from . import jbResponse
 fields = None
 callback = None
 
+# ignoring issuekey prevents a collision in the name space and allows 'key' to work as a field.
+ignored = { 'issuekey' }
+
 # ===============================================
 # Perform a REST API get on the fields endpoint.
 # ===============================================
@@ -55,6 +58,10 @@ def getf( ins ):
                 fields["easyToType"] = easyToType
 
                 for field in fs:
+                    # Ignored fields are ignored ...
+                    if field["id"] in ignored:
+                        continue
+
                     # Map the field IDs to their pretty names.
                     idToPretty[field["id"]] = field["name"]
 
