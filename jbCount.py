@@ -1,4 +1,5 @@
 from . import jbEcho
+from . import jbFields
 from . import jbPayload
 
 import json
@@ -10,6 +11,7 @@ def countf( ins ):
         return
 
     column = ins[0]
+    fcol = jbFields.lookup(column)
 
     # Flatten the payload first.
     results = jbPayload.flattenf( {column} )
@@ -19,10 +21,10 @@ def countf( ins ):
     counts = dict()
     for result in results:
         # Get the value ...
-        if column not in result:
+        if fcol not in result:
             val = '...'
         else:
-            val = result[column]
+            val = result[fcol]
 
         # ... and go counting!
         if val not in counts:

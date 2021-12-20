@@ -15,6 +15,15 @@ arrays and vars
 - using in look
 - using in open
 
+count
+- should load the from each group into 'buckets' so that 'open in jira' can open them
+
+buckets
+- remember buckets
+- combine buckets
+
+keys command to pull keys out of payloads
+
 fields
 - deal with spaces - might just be _ and hope for no collisions!
 - use in select

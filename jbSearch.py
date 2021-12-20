@@ -59,7 +59,7 @@ def searchf( ins ):
             if jbEcho.level == 3:
                 jbPayload.payloadf()
 
-            if jbEcho.level > 1:
+            if jbEcho.level > 0:
                 if "issues" in jbPayload.payload:
                     print( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
                 else:
