@@ -18,6 +18,9 @@ buckets
 
 keys command to pull keys out of payloads
 
+issue
+- issue <key> - displays a single record based on jbselect columns
+
 count
 - order by count asc/desc
 - order by field asc/desc
