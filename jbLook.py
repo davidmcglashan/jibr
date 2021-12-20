@@ -11,6 +11,7 @@ def lookf( ins ):
         print( "No recent search to look at" )
         return
 
+    # If not columns were passed in then use the ones defined in select.
     cols = set()
     if len(ins) > 0:
         cols.update( ins )
