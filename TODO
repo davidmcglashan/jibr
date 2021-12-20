@@ -1,12 +1,21 @@
 payloads
 - save
 - append
-- export
+- export json
+- export csv (excel)
 
 issues
-- open in Jira (web)
+- open in Jira (web) - single issue or query with lots!
+
+arrays and vars
+- setting from payload
+- viewing
+- combining
+- using in where
+- using in look
+- using in open
 
 fields
-- know what custom fields are
+- deal with spaces - might just be _ and hope for no collisions!
 - use in select
 - use in where
