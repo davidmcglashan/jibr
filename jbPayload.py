@@ -1,5 +1,7 @@
 import json
 
+from . import jbFields
+
 payload = None
 
 # =======================================
@@ -29,20 +31,21 @@ def flattenf( cols ):
     results = list()
 
     # Iterate the issues in the payload ...
-    for item in payload["issues"]:
+    for issue in payload["issues"]:
         row = dict()
         results.append( row )
 
-        # Look for the passed in string in the record ... 
+        # Iterate the passed in columns.
         for col in cols:
             obj = None
 
-            if col in item:
-                obj = item[col]
+            # Look for the passed in string in the record ... 
+            if col in issue:
+                obj = issue[col]
 
-            # ... or in the "fields" object.
-            elif "fields" in item and col in item["fields"]:
-                obj = item["fields"][col]
+            # ... or in the record's "fields" object.
+            elif "fields" in issue and col in issue["fields"]:
+                obj = issue["fields"][col]
 
             # Found nothing? Never mind. 
             if obj == None:
@@ -60,12 +63,14 @@ def flattenf( cols ):
                     obj = obj["displayName"]
                 elif "name" in obj:
                     obj = obj["name"]
+                elif "value" in obj:
+                    obj = obj["value"]
                 elif "key" in obj:
                     obj = obj["key"]
                 elif "id" in obj:
                     obj = obj["id"]
 
             # Whatever we got, put it in the results ...
-            row[col] = obj
+            row[ jbFields.lookup(col) ] = obj
 
     return results

@@ -2,11 +2,12 @@
     {
         "name": "System Commands",
         "commands": {
-            "help": "jbHelp.help",
-            "echo": "jbEcho.echof",
-            "quit": "jbFunc.quit",
-            "q":    "jbFunc.quit",
-            "test": "jbScript.test"
+            "help":     "jbHelp.help",
+            "echo":     "jbEcho.echof",
+            "quit":     "jbFunc.quit",
+            "q":        "jbFunc.quit",
+            "test":     "jbScript.test",
+            "fields":   "jbFields.getf"
         }
     },
 
