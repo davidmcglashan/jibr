@@ -1,6 +1,7 @@
 import http.client
 import json
 
+from . import jbEcho
 from . import jbHost
 from . import jbResponse
 
@@ -12,7 +13,8 @@ fields = None
 def getf( ins ):
     conn = http.client.HTTPSConnection( jbHost.host() )
     url = "/rest/api/2/field"
-    print( url )
+    if jbEcho.level == 3:
+        print( url )
 
     # Make the HTTP request and get back a response
     headers = {
@@ -32,6 +34,14 @@ def getf( ins ):
             fs = json.loads( data.decode("utf-8") )
             for field in fs:
                 fields[field["id"]] = field["name"]
+
+    # Display the findings where appropriate.
+    if jbEcho.level == 3:
+        print( json.dumps( fields, indent=4, sort_keys=True ) )
+    
+    if jbEcho.level > 1:
+        print( "%s fields loaded" % len(fields) )
+
 
 # =======================================================================================
 # Look up a single field's posh name. Returns the dull name if the posh one isn't found.

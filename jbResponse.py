@@ -1,7 +1,5 @@
 import http.client
-import json
 
-from json import JSONDecodeError
 from . import jbEcho
 
 # =======================================
@@ -10,12 +8,17 @@ from . import jbEcho
 def handleResponse( response ):
     # No response is rather drastic.
     if response is None:
-        print( "No response" )
+        if jbEcho > 1:
+            print( "No response" )
         return False
     
     # 200s can be quickly returned for the parent method to deal with (happy path)
     if response.status in { 200, 201, 204 } :
         return True
+
+    # If we're muted just return False, otherwise do some printing ...
+    if jbEcho == 0:
+        return False
 
     # 4xx codes need a quick error message. Maybe some debug ...
     s = response.status
@@ -28,10 +31,10 @@ def handleResponse( response ):
     else:
         print( s )
 
-    # The response might contain a JSON string we can use as an error message
+    # The response might contain something useful we can use as an error message.
     print( response.getheaders() )
     data = response.read()
-    if data is not None:
+    if data is not None and jbEcho > 1:
         print( data.decode("utf-8") )
 
     return False

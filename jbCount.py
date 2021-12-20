@@ -1,10 +1,12 @@
+from . import jbEcho
 from . import jbPayload
 
 import json
 
 def countf( ins ):
     if len(ins) == 0:
-        print( "Nothing to count by." )
+        if jbEcho.level > 0:
+            print( "Nothing to count by." )
         return
 
     column = ins[0]
@@ -28,4 +30,5 @@ def countf( ins ):
         else:
             counts[val] = counts[val] + 1
 
-    print( json.dumps( counts, indent=4, sort_keys=True ) )
+    if jbEcho.level > 0:
+        print( json.dumps( counts, indent=4, sort_keys=True ) )

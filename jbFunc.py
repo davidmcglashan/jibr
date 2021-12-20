@@ -1,8 +1,10 @@
 import os
 import json
-from json import JSONDecodeError
 import importlib
 
+from . import jbEcho
+
+from json import JSONDecodeError
 from inspect import signature
 
 # ===================================
@@ -32,10 +34,12 @@ try:
 
 
 except( FileNotFoundError ):
-    print( "commands.json file not found!" )
+    if jbEcho.level > 0:
+        print( "commands.json file not found!" )
     exit()
 except( JSONDecodeError ):
-    print( "Something wrong with commands.json. Check its JSON structure is okay." )
+    if jbEcho.level > 0:
+        print( "Something wrong with commands.json. Check its JSON structure is okay." )
     exit()
 
 # ===================================
@@ -81,7 +85,8 @@ def parse( inpts ):
 #  A quit method.
 # ===================================
 def quit():
-    print( "Goodbye" )
+    if jbEcho.level > 1:
+        print( "Goodbye" )
     exit()
 
 # =====================================

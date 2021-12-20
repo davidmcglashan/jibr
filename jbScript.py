@@ -1,4 +1,6 @@
+from . import jbEcho
 from . import jbFunc
+
 import os
 
 # ==========================================
@@ -18,9 +20,10 @@ def script(ins):
     try:
         with open( filename ) as file:
             execf( file )
-        print( filename + ": finished" )
+        if jbEcho.level > 1:
+            print( filename + ": finished" )
     except( FileNotFoundError ):
-        if ins[0] != "default":
+        if ins[0] != "default" and jbEcho.level > 1:
             print( "File not found: " + filename )
 
 # ======================================================
@@ -33,15 +36,18 @@ def test(ins):
         with open( filename ) as file:
             execf( file )
 
-        print( "Basic tests all finished" )
+        if jbEcho.level > 1:
+            print( "Basic tests all finished" )
 
         filename = os.path.join( os.path.dirname(__file__), "test-advanced.jibr" )
         with open( filename ) as file:
             execf( file )
 
-        print( "Advanced tests all finished" )
+        if jbEcho.level > 1:
+            print( "Advanced tests all finished" )
     except( FileNotFoundError ):
-        print( "test file not found" )
+        if jbEcho.level > 1:
+            print( "test file not found" )
 
 # ======================================================
 #  Execute a JIBR file, line by line.
@@ -51,7 +57,7 @@ def execf( file ):
 
     for line in lines:
         # Empty lines get echo'd to the output as empty lines
-        if len( line.rstrip() ) == 0:
+        if jbEcho.level == 3 and len( line.rstrip() ) == 0:
             print()
 
         # Comments are ignored. Everything is passed to the brFunc parser to be executed.

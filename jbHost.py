@@ -1,3 +1,5 @@
+from . import jbEcho
+
 hostname = None
 port = 80
 accessToken = "No Access Token"
@@ -11,7 +13,8 @@ def hostnamef( ins ):
     if len(ins) == 1: 
         hostname = ins[0]
 
-    print( "Host name is %s" % hostname )
+    if jbEcho.level > 0:
+        print( "Host name is %s" % hostname )
 
 # =======================================
 # Print or set the port number
@@ -22,13 +25,15 @@ def portf( ins ):
     if len(ins) == 1: 
         port = ins[0]
 
-    print( "Post number is %s" % port )
+    if jbEcho.level > 0:
+        print( "Port number is %s" % port )
 
 # =======================================
 # Print the URL
 # =======================================
 def hostf( ins ):
-    print( host() )
+    if jbEcho.level > 0:
+        print( host() )
 
 # =======================================
 # Return the URL
@@ -45,5 +50,5 @@ def token( ins ):
     if len(ins) == 1: 
         accessToken = "Bearer " + ins[0]
 
-    print( accessToken[0:20] + '...')
-    
+    if jbEcho.level > 0:
+        print( accessToken[0:20] + '...')

@@ -2,10 +2,7 @@ help
 help help
 help echo
 
-echo on
-echo off
-
-hosstname
+hostname
 hostname foo
 hostname
 

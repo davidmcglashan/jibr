@@ -1,3 +1,5 @@
+from . import jbEcho
+
 import re
 
 cols = "id,key"
@@ -45,7 +47,8 @@ def columnsf( ins ):
     elif len(ins) > 0:
         columnsParsef( ins )
 
-    print( "Columns are %s" % cols )
+    if jbEcho.level > 0:
+        print( "Columns are %s" % cols )
 
 # ==========================================================================
 # Parse the arguments and produce a columns string for the SELECT parameter

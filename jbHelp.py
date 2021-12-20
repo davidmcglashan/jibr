@@ -1,4 +1,5 @@
 from . import jbFunc
+from . import jbEcho
 
 import importlib
 from inspect import signature
@@ -27,6 +28,10 @@ def out( syntax, desc, args = None, top=True):
 # List all the available commands
 # ===================================
 def help( ins ):
+    # Help does nothing if we're muted.
+    if jbEcho.level == 0:
+        return
+
     # No params means show the general help
     if len(ins) == 0:
         print( "Available commands ...")

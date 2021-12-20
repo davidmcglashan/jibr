@@ -34,7 +34,8 @@ def searchf( ins ):
     if jbSelect.columns() != "*":
         url = url + "&fields=" + jbSelect.columns()
 
-    print( url )
+    if jbEcho.level > 1:
+        print( url )
 
     # Make the HTTP request and get back a response
     headers = {
@@ -55,13 +56,14 @@ def searchf( ins ):
             if jsonCb != None:
                 jsonCb( url, jbPayload.payload )
 
-            if jbEcho.echo:
+            if jbEcho.level == 3:
                 jbPayload.payloadf()
 
-            if "issues" in jbPayload.payload:
-                print( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
-            else:
-                print( "1 record retrieved" )
+            if jbEcho.level > 1:
+                if "issues" in jbPayload.payload:
+                    print( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
+                else:
+                    print( "1 record retrieved" )
 
 # =======================================
 # Print or set the start at number
@@ -72,7 +74,8 @@ def startAtf( ins ):
     if len(ins) == 1: 
         startAt = ins[0]
 
-    print( "Results will start at %s" % startAt )
+    if jbEcho.level > 0:
+        print( "Results will start at %s" % startAt )
 
 # =======================================
 # Print or set the start at number
@@ -83,7 +86,8 @@ def maxResultsf( ins ):
     if len(ins) == 1: 
         maxResults = ins[0]
 
-    print( "Max results returned will be %s" % maxResults )
+    if jbEcho.level > 0:
+        print( "Max results returned will be %s" % maxResults )
 
 # ===================================================================
 #  Pass in a function to become the JSON callback for searches.
