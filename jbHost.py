@@ -1,5 +1,7 @@
 from . import jbEcho
 
+import webbrowser
+
 hostname = None
 port = 80
 accessToken = "No Access Token"
@@ -52,3 +54,21 @@ def token( ins ):
 
     if jbEcho.level > 0:
         print( accessToken[0:20] + '...')
+
+# =============================================
+# Open the supplied key(s) in Jira on the web. 
+# =============================================
+def jiraf( ins ):
+    # No key means nothing to open.
+    if len(ins) == 0:
+        if jbEcho.level > 0:
+            print( "Nothing to open" )
+        return
+
+    # 1 key we can open directly on the record.
+    if len(ins) == 1:
+        url = "https://%s:%s/browse/%s" % (hostname,port,ins[0])
+        if jbEcho.level > 1:
+            print( url )
+        webbrowser.open( url )
+

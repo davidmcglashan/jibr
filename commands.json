@@ -14,9 +14,10 @@
         "name": "Jira host configuration and authentication",
         "commands": {
             "hostname": "jbHost.hostnamef",
-            "port": "jbHost.portf",
-            "host": "jbHost.hostf",
-            "token": "jbHost.token"
+            "port":     "jbHost.portf",
+            "host":     "jbHost.hostf",
+            "token":    "jbHost.token",
+            "jira":     "jbHost.jiraf"
         }
     },
 
