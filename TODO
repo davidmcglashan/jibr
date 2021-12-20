@@ -1,6 +1,3 @@
-fields
-- use in where
-
 open in jira
 - jira key - open an issue
 - jira payload - open the payload's keys in a search: key in ()

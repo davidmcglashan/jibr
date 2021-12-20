@@ -5,7 +5,7 @@ from . import jbEcho
 from . import jbHost
 from . import jbResponse
 from . import jbSelect
-from . import jqlParse
+from . import jbParse
 from . import jbPayload
 
 previousIns = []
@@ -25,7 +25,7 @@ def searchf( ins ):
     previousIns = ins
 
     conn = http.client.HTTPSConnection( jbHost.host() )
-    url = "/rest/api/2/search?jql=%s" % jqlParse.parse(ins)
+    url = "/rest/api/2/search?jql=%s" % jbParse.parse(ins)
 
     # Always do maxresults and startat even if they're the system defaults.
     url = url + "&maxResults=%s&startAt=%s" % ( maxResults, startAt )
