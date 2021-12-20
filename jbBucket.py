@@ -111,3 +111,11 @@ def by( ins ):
         display()
     elif jbEcho.level > 3:
         print( json.dumps( buckets, indent=4, sort_keys=True ) )
+
+# ======================================================
+#  Return the keys in a named bucket (or an empty list)
+# ======================================================
+def keys( bucket ):
+    if bucket in buckets:
+        return buckets[bucket]["keys"]
+    return list()

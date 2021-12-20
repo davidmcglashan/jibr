@@ -1,3 +1,4 @@
+from . import jbBucket
 from . import jbEcho
 from . import jbPayload
 from . import jbSearch
@@ -69,7 +70,7 @@ def jiraf( ins ):
         return
 
     # The 'search' keyword opens a Jira search URL
-    if len(ins) == 1 and ins[0] == 'search':
+    elif len(ins) == 1 and ins[0] == 'search':
         url = "https://%s:%s/issues/?jql=%s" % (hostname,port,jbParse.parse(jbSearch.previousIns))
         if jbEcho.level > 1:
             print( url )
@@ -82,3 +83,14 @@ def jiraf( ins ):
             print( url )
         webbrowser.open( url )
 
+    # The 'bucket' keyword opens a Jira search with the bucket's keys passed into the JQL
+    elif len(ins) == 2 and ins[0] == 'bucket':
+        keys = jbBucket.keys( ins[1] )
+        if len(keys) == 0:
+            return
+
+        url = "https://%s:%s/issues/?jql=key in (%s)" % (hostname,port,",".join(keys))
+
+        if jbEcho.level > 1:
+            print( url )
+        webbrowser.open( url )
