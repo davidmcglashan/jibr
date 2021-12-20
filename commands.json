@@ -50,9 +50,11 @@
     {
         "name": "Analysing payloads",
         "commands": {
-            "payload":      "jbPayload.payloadf",
-            "look":         "jbLook.lookf",
-            "count":        "jbCount.countf"
+            "payload":  "jbPayload.payloadf",
+            "look":     "jbLook.lookf",
+            "count":    "jbCount.countf",
+            "bucket":   "jbBucket.bucketf",
+            "bk":       "jbBucket.bucketf"
         }
     }
 ]
