@@ -3,6 +3,12 @@ buckets
 - payload bucket <id> - show the payload for just the bucket contents
 - look bucket <id> - look's output but the contents are a bucket
 
+help
+- done as named text files rather than anything too structured
+
+tests
+- scripts for each command
+
 issue
 - issue <key> - displays a single record based on jbselect columns
 
