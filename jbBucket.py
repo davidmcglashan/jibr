@@ -24,7 +24,8 @@ def bucketf( ins ):
     elif ins[0] == 'clear':
         clear( ins )
 
-    elif len(ins) == 3 and ins[0] == 'copy':
+    # Copy a bucket
+    elif len(ins) >= 3 and ins[0] == 'copy':
         copy( ins )
 
 # =======================================
@@ -147,7 +148,11 @@ def copy( ins ):
 
     # Do the copy
     newb = dict()
-    newb["name"] = buckets[src]["name"]
+    if len(ins) == 3:
+        newb["name"] = buckets[src]["name"]
+    else:
+        newb["name"] = " ".join(ins[3:]).strip()
+
     newb["keys"] = list()
     newb["keys"] = newb["keys"] + buckets[src]["keys"]
     buckets[dst] = newb
@@ -159,7 +164,7 @@ def copy( ins ):
 # ======================================================
 def clear( ins ):
     global buckets
-    
+
     # Clear all the buckets!
     if len(ins) == 2 and ins[0] == 'clear' and ins[1] == 'all':
         buckets = dict()
