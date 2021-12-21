@@ -1,12 +1,14 @@
 buckets
-- bucket by 'field field field'
-- bk <id> + <id> combine buckets (not numbered)
-- bk <id> - <id> combine buckets (not numbered)
-
-keys command to pull keys out of payloads
+- ? where key in bucket
+- payload bucket <id> - show the payload for just the bucket contents
+- look bucket <id> - look's output but the contents are a bucket
 
 issue
 - issue <key> - displays a single record based on jbselect columns
+
+buckets
+- bucket by 'field field field'
+- bk <id> - <id> combine buckets (not numbered)
 
 count
 - order by count asc/desc
@@ -26,4 +28,7 @@ arrays and vars
 - using in where
 - using in look
 - using in open
+
+keys command to pull keys out of payloads
+- why?
 

@@ -32,6 +32,10 @@ def bucketf( ins ):
     elif len(ins) >= 3 and ins[0] == 'rename':
         rename( ins )
 
+    # Merge two buckets
+    elif len(ins) == 3 and ins[1] == '+':
+        merge( ins )
+
     # One parameter means display that bucket's contents.
     elif len(ins) == 1:
         contents(ins[0])
@@ -226,3 +230,35 @@ def clear( ins ):
     elif len(ins) == 1 and ins[0] == 'clear':
         removeNumberedBuckets()
         display()
+
+# ======================================================
+#  Merge two buckets together
+# ======================================================
+def merge( ins ):
+    global buckets
+
+    src = ins[2]
+    dst = ins[0]
+
+    # Copy pre-conditions must be met.
+    if src not in buckets:
+        if jbEcho.level > 0:
+            print( "Bucket '%s' does not exist." % src)
+            return
+
+    if not src.isnumeric():
+        if jbEcho.level > 0:
+            print( "Numbered bucket '%s' cannot receive a merge." % dst )
+            return
+
+    if dst not in buckets:
+        if jbEcho.level > 0:
+            print( "Bucket '%s' does not exist." % dst )
+            return
+
+    # Do the merge but keep the dupes out.
+    for key in buckets[src]["keys"]:
+        if key not in buckets[dst]["keys"]:
+            buckets[dst]["keys"].append( key )
+
+    contents( dst )
