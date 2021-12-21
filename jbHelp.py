@@ -61,5 +61,5 @@ def help( ins ):
                     function = getattr( module, fname )
                     function()
                 except( AttributeError, ModuleNotFoundError ):
-                    print( "No help has been provided for '%s'" % ins[0] )
+                    jbEcho.echo( "No help has been provided for '%s'" % ins[0] )
                     break

@@ -19,8 +19,7 @@ def hostnamef( ins ):
     if len(ins) == 1: 
         hostname = ins[0]
 
-    if jbEcho.level > 0:
-        print( "Host name is %s" % hostname )
+    jbEcho.echo( "Host name is %s" % hostname, 1 )
 
 # =======================================
 # Print or set the port number
@@ -31,15 +30,13 @@ def portf( ins ):
     if len(ins) == 1: 
         port = ins[0]
 
-    if jbEcho.level > 0:
-        print( "Port number is %s" % port )
+    jbEcho.echo( "Port number is %s" % port, 1 )
 
 # =======================================
 # Print the URL
 # =======================================
 def hostf( ins ):
-    if jbEcho.level > 0:
-        print( host() )
+    jbEcho.echo( host(), 1 )
 
 # =======================================
 # Return the URL
@@ -56,8 +53,7 @@ def token( ins ):
     if len(ins) == 1: 
         accessToken = "Bearer " + ins[0]
 
-    if jbEcho.level > 0:
-        print( accessToken[0:20] + '...')
+    jbEcho.echo( accessToken[0:20] + '...', 1 )
 
 # =============================================
 # Open the supplied key(s) in Jira on the web. 
@@ -65,22 +61,19 @@ def token( ins ):
 def jiraf( ins ):
     # No key means nothing to open.
     if len(ins) == 0:
-        if jbEcho.level > 0:
-            print( "Nothing to open" )
+        jbEcho.echo( "Nothing to open", 0 )
         return
 
     # The 'search' keyword opens a Jira search URL
     elif len(ins) == 1 and ins[0] == 'search':
         url = "https://%s:%s/issues/?jql=%s" % (hostname,port,jbParse.parse(jbSearch.previousIns))
-        if jbEcho.level > 1:
-            print( url )
+        jbEcho.echo( url, 2 )
         webbrowser.open( url )
 
     # 1 key we can open directly on the record.
     elif len(ins) == 1:
         url = "https://%s:%s/browse/%s" % (hostname,port,ins[0])
-        if jbEcho.level > 1:
-            print( url )
+        jbEcho.echo( url, 2 )
         webbrowser.open( url )
 
     # The 'bucket' keyword opens a Jira search with the bucket's keys passed into the JQL
@@ -91,6 +84,5 @@ def jiraf( ins ):
 
         url = "https://%s:%s/issues/?jql=key in (%s)" % (hostname,port,",".join(keys))
 
-        if jbEcho.level > 1:
-            print( url )
+        jbEcho.echo( url, 2 )
         webbrowser.open( url )

@@ -5,9 +5,27 @@
 #  3 - Everything - Includes network chatter and debug.
 
 level = 2
+output = print
+lastEcho = None
+
+# ==========================================================
+# This function replaces print() when test mode is enabled.
+# ==========================================================
+def mute( string ):
+    pass
+
+# ==========================================================
+# Test mode replaces print() with the mute function above.
+# ==========================================================
+def testmode( enabled=True ):
+    global output
+    if enabled:
+        output = mute
+    else:
+        output = print
 
 # ===================================
-# Echo on/off/report
+# Set the echo level
 # ===================================
 def echof( ins ):
     global level
@@ -21,5 +39,13 @@ def echof( ins ):
     elif len(ins) == 1 and ins[0] == "3":
         level = 3
 
-    if level > 0:
-        print( "Echo level is %s" % level )
+    echo( "Echo level is %s" % level )
+
+# =================================================================================
+# Echo some text if the current level exceeds or equals the optional displayLevel.
+# =================================================================================
+def echo( string, displayLevel=1 ):
+    if level >= displayLevel:
+        output( string )
+        global lastEcho
+        lastEcho = string

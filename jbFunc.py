@@ -30,16 +30,13 @@ try:
                     module = importlib.import_module( "jibr.help." + mname + "Help" )
                     function = getattr( module, fname )
                 except( AttributeError, ModuleNotFoundError ):
-                    print( "No help has been provided for '%s'" % cmdkey )
-
-
+                    jbEcho.echo( "No help has been provided for '%s'" % cmdkey )
+                    
 except( FileNotFoundError ):
-    if jbEcho.level > 0:
-        print( "commands.json file not found!" )
+    jbEcho.echo( "commands.json file not found!", 1 )
     exit()
 except( JSONDecodeError ):
-    if jbEcho.level > 0:
-        print( "Something wrong with commands.json. Check its JSON structure is okay." )
+    jbEcho.echo( "Something wrong with commands.json. Check its JSON structure is okay.", 1 )
     exit()
 
 # ===================================
@@ -60,7 +57,7 @@ def parse( inpts ):
 
     # We didn't find a command so the input must be invalid
     if cmd == None:    
-        print( "No such command '%s'" % inpt[0] )
+        jbEcho.echo( "No such command '%s'" % inpt[0], 1 )
 
     # Work out what we need to call from what was typed
     else:
@@ -85,8 +82,7 @@ def parse( inpts ):
 #  A quit method.
 # ===================================
 def quit():
-    if jbEcho.level > 1:
-        print( "Goodbye" )
+    jbEcho.echo( "Goodbye", 1 )
     exit()
 
 # =====================================
