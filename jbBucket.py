@@ -20,15 +20,12 @@ def bucketf( ins ):
     elif ins[0] == 'by':
         by( ins )
 
-    # clear all the buckets
-    elif len(ins) == 2 and ins[0] == 'clear' and ins[1] == 'all':
-        buckets = dict()
-        display()
-
-    # clear all the buckets
+    # clear the buckets
     elif ins[0] == 'clear':
-        removeNumberedBuckets()
-        display()
+        clear( ins )
+
+    elif len(ins) == 3 and ins[0] == 'copy':
+        copy( ins )
 
 # =======================================
 # Display the state of the buckets.
@@ -46,6 +43,7 @@ def display():
     # Display the numbered buckets
     i = 0
     nbs = set()
+    bucket = ""
     while str(i) in buckets:
         key = str(i)
         bucket = buckets[key]
@@ -58,13 +56,15 @@ def display():
     # Display the named buckets by removing the numbered ones from the master bucket set.
     named = buckets.keys() - nbs
     for key in sorted( named ):
-        print( "%s: '%s' (%s keys)" % (key,bucket["name"],len(bucket["keys"])) )
+        print( "%s: '%s' (%s keys)" % (key,buckets[key]["name"],len(buckets[key]["keys"])) )
 
 # =======================================
 # Remove the numbered buckets
 # =======================================
 def removeNumberedBuckets():
+    global buckets
     i = 0
+
     while str(i) in buckets:
         del buckets[str(i)]
         i = i + 1
@@ -119,3 +119,67 @@ def keys( bucket ):
     if bucket in buckets:
         return buckets[bucket]["keys"]
     return list()
+
+# ======================================================
+#  Copy a bucket into a new bucket
+# ======================================================
+def copy( ins ):
+    global buckets
+
+    src = ins[1]
+    dst = ins[2]
+
+    # Copy pre-conditions must be met.
+    if src not in buckets:
+        if jbEcho.level > 0:
+            print( "Bucket '%s' does not exist." % src)
+            return
+
+    if dst in buckets:
+        if jbEcho.level > 0:
+            print( "Bucket '%s' already exists." % dst )
+            return
+
+    if dst.isnumeric():
+        if jbEcho.level > 0:
+            print( "Bucket name '%s' is a number." % dst )
+            return
+
+    # Do the copy
+    newb = dict()
+    newb["name"] = buckets[src]["name"]
+    newb["keys"] = list()
+    newb["keys"] = newb["keys"] + buckets[src]["keys"]
+    buckets[dst] = newb
+
+    display()
+
+# ======================================================
+# Clear bucket contents.
+# ======================================================
+def clear( ins ):
+    global buckets
+    
+    # Clear all the buckets!
+    if len(ins) == 2 and ins[0] == 'clear' and ins[1] == 'all':
+        buckets = dict()
+        display()
+
+    # clear the named bucket
+    elif len(ins) == 2 and ins[0] == 'clear':
+        if ins[1] not in buckets:
+            if jbEcho.level > 0:
+                print( "Bucket %s not found" % ins[1] )
+                return
+        if ins[1].isnumeric():
+            if jbEcho.level > 0:
+                print( "Cannot clear numbered buckets" )
+                return
+
+        del buckets[ins[1]]
+        display()
+
+    # clear all the numbered buckets
+    elif len(ins) == 1 and ins[0] == 'clear':
+        removeNumberedBuckets()
+        display()

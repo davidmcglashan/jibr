@@ -1,11 +1,8 @@
 buckets
 - bucket by 'field field field'
-- bk clear (numbered)
-- bk clear all (all buckets)
-- bk copy <num> <name> remember buckets by naming them
-- bk <id> + <id> combine buckets
-- bk <id> - <id> combine buckets
-- bk jira <id> - open in jira
+- bucket rename
+- bk <id> + <id> combine buckets (not numbered)
+- bk <id> - <id> combine buckets (not numbered)
 
 keys command to pull keys out of payloads
 
