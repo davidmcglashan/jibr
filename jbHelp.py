@@ -1,6 +1,6 @@
 from . import jbFunc
 from . import jbEcho
-
+import os
 import importlib
 from inspect import signature
 
@@ -34,32 +34,26 @@ def help( ins ):
 
     # No params means show the general help
     if len(ins) == 0:
-        print( "Available commands ...")
+        jbEcho.echo( "Available commands ...")
 
         for block in jbFunc.supported:
-            print()
-            print( "  %s" % block["name"] )
+            jbEcho.echo()
+            jbEcho.echo( "  %s" % block["name"] )
             for cmd in block["commands"]:
-                print( "   > %s" % cmd )
+                jbEcho.echo( "   > %s" % cmd )
 
     # More params means try and do some reflection to call a help function that
     # might tell us more ...
     else:
         for block in jbFunc.supported:
             if ins[0] in block["commands"]:
-                # Work out what we need to call
-                cmd = block["commands"][ ins[0] ]
-
-                # Here is the reflection to get the function from the module
                 try:
-                    dot = cmd.index('.')
-                    mname = cmd[:dot]
-                    fname = cmd[dot+1:]
+                    filename = os.path.join( os.path.dirname(__file__), "help/%s.txt" % ins[0])
+                    with open( filename ) as file:
+                        lines = file.readlines()
+                        for line in lines:
+                            jbEcho.echo( line.rstrip() )
 
-                    # Here is the reflection to get the function from the module
-                    module = importlib.import_module( "jibr.help." + mname + "Help" )
-                    function = getattr( module, fname )
-                    function()
-                except( AttributeError, ModuleNotFoundError ):
+                except( FileNotFoundError ):
                     jbEcho.echo( "No help has been provided for '%s'" % ins[0] )
                     break

@@ -1,0 +1,23 @@
+echo (on|off|[level])
+
+Changes the output threshold for text being written to the console. Output can be suppressed or changed to provide different levels of detail.
+
+There are four levels ...
+ 0 - Absolutely mute - nothing is printed
+ 1 - Minimal - only commands whose intent is to display (e.g. look, help) display something.
+ 2 - Normal - Some "commentary" is provided
+ 3 - Everything - Includes network chatter and debug.
+
+Usage ...
+
+  > echo
+  Reports the current level as a number
+
+  > echo [level]
+  Sets the current level to [level]
+
+  > echo on
+  Sets the current level to 2
+
+  > echo off
+  Sets the current level to 1

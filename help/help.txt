@@ -1,0 +1,9 @@
+help ([command])
+
+Provides help and guidance about the system or a specific command.
+
+  > help
+  Lists all available commands.
+
+  > help ([command])
+  Provides help about [command].

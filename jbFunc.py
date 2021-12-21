@@ -1,4 +1,5 @@
 import os
+import os.path
 import json
 import importlib
 
@@ -15,23 +16,13 @@ try:
     with open( os.path.join(os.path.dirname(__file__), 'commands.json') ) as file:
         supported = json.load( file )
 
-        # Quickly reflect each loaded command to see if there is a help file for it.
+        # Quickly check each command to see if there is a help file for it.
         for block in supported:
             for cmdkey in block["commands"]:
-                command = block["commands"][cmdkey]
-
-                # Here is the reflection to get the function from the module
-                try:
-                    dot = command.index('.')
-                    mname = command[:dot]
-                    fname = command[dot+1:]
-
-                    # Here is the reflection to get the function from the module
-                    module = importlib.import_module( "jibr.help." + mname + "Help" )
-                    function = getattr( module, fname )
-                except( AttributeError, ModuleNotFoundError ):
+                helpfile = os.path.join( os.path.dirname(__file__), "help/%s.txt" % cmdkey )
+                if not os.path.isfile( helpfile ):
                     jbEcho.echo( "No help has been provided for '%s'" % cmdkey )
-                    
+
 except( FileNotFoundError ):
     jbEcho.echo( "commands.json file not found!", 1 )
     exit()

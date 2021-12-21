@@ -6,10 +6,6 @@ buckets
 help
 - done as named text files rather than anything too structured
 
-tests
-- https://realpython.com/python-testing/
-- Can the test command fire the test suite?
-
 issue
 - issue <key> - displays a single record based on jbselect columns
 
