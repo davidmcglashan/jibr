@@ -57,7 +57,7 @@ def help( ins ):
                     fname = cmd[dot+1:]
 
                     # Here is the reflection to get the function from the module
-                    module = importlib.import_module( "breather.help." + mname + "Help" )
+                    module = importlib.import_module( "jibr.help." + mname + "Help" )
                     function = getattr( module, fname )
                     function()
                 except( AttributeError, ModuleNotFoundError ):
