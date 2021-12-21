@@ -24,7 +24,7 @@ def script(ins):
             for line in lines:
                 # Empty lines get echo'd to the output as empty lines
                 if jbEcho.level == 3 and len( line.rstrip() ) == 0:
-                    jbEcho.echo( '' )
+                    jbEcho.echo()
 
                 # Comments are ignored. Everything is passed to the brFunc parser to be executed.
                 elif line[0] != "#":

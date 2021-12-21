@@ -44,7 +44,7 @@ def echof( ins ):
 # =================================================================================
 # Echo some text if the current level exceeds or equals the optional displayLevel.
 # =================================================================================
-def echo( string, displayLevel=1 ):
+def echo( string='', displayLevel=1 ):
     if level >= displayLevel:
         output( string )
         global lastEcho
