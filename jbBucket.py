@@ -50,7 +50,7 @@ def display():
 
     # No buckets, no display!
     if len(buckets) == 0:
-        print( "No buckets" )
+        jbEcho.echo( "No buckets" )
         return
 
     # Display the numbered buckets
@@ -60,7 +60,7 @@ def display():
     while str(i) in buckets:
         key = str(i)
         bucket = buckets[key]
-        print( "%s: '%s' (%s keys)" % (key,bucket["name"],len(bucket["keys"])) )
+        jbEcho.echo( "%s: '%s' (%s keys)" % (key,bucket["name"],len(bucket["keys"])) )
         i = i + 1
 
         # Remember this key so we can remove it from the named searches later
@@ -69,7 +69,7 @@ def display():
     # Display the named buckets by removing the numbered ones from the master bucket set.
     named = buckets.keys() - nbs
     for key in sorted( named ):
-        print( "%s: '%s' (%s keys)" % (key,buckets[key]["name"],len(buckets[key]["keys"])) )
+        jbEcho.echo( "%s: '%s' (%s keys)" % (key,buckets[key]["name"],len(buckets[key]["keys"])) )
 
 # =======================================
 # Remove the numbered buckets
@@ -122,8 +122,8 @@ def by( ins ):
     # Display the new bucket structure
     if jbEcho.level in {1,2}:
         display()
-    elif jbEcho.level > 3:
-        print( json.dumps( buckets, indent=4, sort_keys=True ) )
+    else:
+        jbEcho.echo( json.dumps( buckets, indent=4, sort_keys=True ), 3 )
 
 # ======================================================
 #  Return the keys in a named bucket (or an empty list)
@@ -144,19 +144,16 @@ def copy( ins ):
 
     # Copy pre-conditions must be met.
     if src not in buckets:
-        if jbEcho.level > 0:
-            print( "Bucket '%s' does not exist." % src)
-            return
+        jbEcho.echo( "Bucket '%s' does not exist." % src)
+        return
 
     if dst in buckets:
-        if jbEcho.level > 0:
-            print( "Bucket '%s' already exists." % dst )
-            return
+        jbEcho.echo( "Bucket '%s' already exists." % dst )
+        return
 
     if dst.isnumeric():
-        if jbEcho.level > 0:
-            print( "Bucket name '%s' is a number." % dst )
-            return
+        jbEcho.echo( "Bucket name '%s' is a number." % dst )
+        return
 
     # Do the copy
     newb = dict()
@@ -179,9 +176,8 @@ def rename( ins ):
 
     # Copy pre-conditions must be met.
     if ins[1] not in buckets:
-        if jbEcho.level > 0:
-            print( "Bucket '%s' does not exist." % ins[1])
-            return
+        jbEcho.echo( "Bucket '%s' does not exist." % ins[1])
+        return
     
     buckets[ins[1]]["name"] = " ".join(ins[2:]).strip()
     
@@ -197,9 +193,9 @@ def contents( key ):
 
     # Copy pre-conditions must be met.
     if key not in buckets:
-        print( "Bucket '%s' does not exist." % key )
+        jbEcho.echo( "Bucket '%s' does not exist." % key )
     
-    print( json.dumps( buckets[key], indent=4, sort_keys=True ) )
+    jbEcho.echo( json.dumps( buckets[key], indent=4, sort_keys=True ) )
 
 # ======================================================
 # Clear bucket contents.
@@ -215,13 +211,11 @@ def clear( ins ):
     # clear the named bucket
     elif len(ins) == 2 and ins[0] == 'clear':
         if ins[1] not in buckets:
-            if jbEcho.level > 0:
-                print( "Bucket %s not found" % ins[1] )
-                return
+            jbEcho.echo( "Bucket %s not found" % ins[1] )
+            return
         if ins[1].isnumeric():
-            if jbEcho.level > 0:
-                print( "Cannot clear numbered buckets" )
-                return
+            jbEcho.echo( "Cannot clear numbered buckets" )
+            return
 
         del buckets[ins[1]]
         display()
@@ -242,19 +236,16 @@ def merge( ins ):
 
     # Copy pre-conditions must be met.
     if src not in buckets:
-        if jbEcho.level > 0:
-            print( "Bucket '%s' does not exist." % src)
-            return
+        jbEcho.echo( "Bucket '%s' does not exist." % src)
+        return
 
     if not src.isnumeric():
-        if jbEcho.level > 0:
-            print( "Numbered bucket '%s' cannot receive a merge." % dst )
-            return
+        jbEcho.echo( "Numbered bucket '%s' cannot receive a merge." % dst )
+        return
 
     if dst not in buckets:
-        if jbEcho.level > 0:
-            print( "Bucket '%s' does not exist." % dst )
-            return
+        jbEcho.echo( "Bucket '%s' does not exist." % dst )
+        return
 
     # Do the merge but keep the dupes out.
     for key in buckets[src]["keys"]:

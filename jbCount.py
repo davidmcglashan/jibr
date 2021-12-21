@@ -4,10 +4,12 @@ from . import jbPayload
 
 import json
 
+# =======================================================
+# Count the items in the payload by the passed in field.
+# =======================================================
 def countf( ins ):
     if len(ins) == 0:
-        if jbEcho.level > 0:
-            print( "Nothing to count by." )
+        jbEcho.echo( "Nothing to count by." )
         return
 
     column = jbFields.findIdByEasy(ins[0])
@@ -32,5 +34,4 @@ def countf( ins ):
         else:
             counts[val] = counts[val] + 1
 
-    if jbEcho.level > 0:
-        print( json.dumps( counts, indent=4, sort_keys=True ) )
+    jbEcho.echo( json.dumps( counts, indent=4, sort_keys=True ) )

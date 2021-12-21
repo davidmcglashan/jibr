@@ -13,7 +13,7 @@ def lookf( ins ):
         return
 
     if jbPayload.payload == None or "issues" not in jbPayload.payload:
-        print( "No recent search to look at" )
+        jbEcho.echo( "No recent search to look at" )
         return
 
     # If not columns were passed in then use the ones defined in select.
@@ -30,4 +30,4 @@ def lookf( ins ):
 
     # Flatten the results according to the columns and print the results.
     results = jbPayload.flattenf( cols )
-    print( json.dumps( results, indent=4, sort_keys=True ) )
+    jbEcho.echo( json.dumps( results, indent=4, sort_keys=True ) )

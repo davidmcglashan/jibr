@@ -19,18 +19,16 @@ def getf( ins ):
 
     # No params means display the current fields maps.
     if len(ins) == 0:
-        if jbEcho.level > 0:
-            if fields != None:
-                print( json.dumps( fields, indent=4, sort_keys=True ) )
-            else:
-                print( "Fields have not been loaded yet.")
+        if fields != None:
+            jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ) )
+        else:
+            jbEcho.echo( "Fields have not been loaded yet.")
         return
 
     if len(ins) == 1 and ins[0] == 'get':
         conn = http.client.HTTPSConnection( jbHost.host() )
         url = "/rest/api/2/field"
-        if jbEcho.level > 1:
-            print( url )
+        jbEcho.echo( url )
 
         # Make the HTTP request and get back a response
         headers = {
@@ -45,7 +43,7 @@ def getf( ins ):
 
             # No data? Never mind ...
             if data is None:
-                print( "Nope data" )
+                jbEcho.echo( "Nope data" )
             
             else:
                 fs = json.loads( data.decode("utf-8") )
@@ -69,12 +67,10 @@ def getf( ins ):
                     easyToType[ easify( field["name"] ) ] = field["id"]
 
         # Display the findings where appropriate.
-        if jbEcho.level == 3:
-            print( json.dumps( fields, indent=4, sort_keys=True ) )
-        
-        if jbEcho.level > 0:
-            print( "%s fields loaded" % len(idToPretty) )
+        jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ), 3 )
+        jbEcho.echo( "%s fields loaded" % len(idToPretty) )
 
+        # Hit up the fields callback.
         if callback != None:
             callback( fields )
 

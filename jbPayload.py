@@ -18,9 +18,9 @@ def set( pl ):
 def payloadf():
     if jbEcho.level > 0:
         if payload == None:
-            print( "There is no payload. Try doing a search!" )
+            jbEcho.echo( "There is no payload. Try doing a search!" )
         else:
-            print( json.dumps( payload, indent=4, sort_keys=True ) )
+            jbEcho.echo( json.dumps( payload, indent=4, sort_keys=True ) )
 
 # ============================================================================
 #  Flattens the Jira payload into a simpler model you can manipulate easier.
@@ -28,8 +28,7 @@ def payloadf():
 def flattenf( cols ):
     # No payload, no dice!
     if payload == None:
-        if jbEcho.level > 0:
-            print( "There is no payload. Try doing a search!" )
+        jbEcho.echo( "There is no payload. Try doing a search!" )
         return
 
     results = list()

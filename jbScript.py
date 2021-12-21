@@ -24,14 +24,14 @@ def script(ins):
             for line in lines:
                 # Empty lines get echo'd to the output as empty lines
                 if jbEcho.level == 3 and len( line.rstrip() ) == 0:
-                    print()
+                    jbEcho.echo( '' )
 
                 # Comments are ignored. Everything is passed to the brFunc parser to be executed.
                 elif line[0] != "#":
                     jbFunc.parse( line.rstrip() )
-        if jbEcho.level > 1:
-            print( filename + ": finished" )
+
+        jbEcho.echo( filename + ": finished", 2 )
     except( FileNotFoundError ):
         if ins[0] != "default" and jbEcho.level > 1:
-            print( "File not found: " + filename )
+            jbEcho.echo( "File not found: " + filename, 2 )
 
