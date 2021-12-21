@@ -28,6 +28,10 @@ def bucketf( ins ):
     elif len(ins) >= 3 and ins[0] == 'copy':
         copy( ins )
 
+    # Rename a bucket
+    elif len(ins) >= 3 and ins[0] == 'rename':
+        rename( ins )
+
 # =======================================
 # Display the state of the buckets.
 # =======================================
@@ -157,6 +161,22 @@ def copy( ins ):
     newb["keys"] = newb["keys"] + buckets[src]["keys"]
     buckets[dst] = newb
 
+    display()
+
+# ======================================================
+#  Copy a bucket into a new bucket
+# ======================================================
+def rename( ins ):
+    global buckets
+
+    # Copy pre-conditions must be met.
+    if ins[1] not in buckets:
+        if jbEcho.level > 0:
+            print( "Bucket '%s' does not exist." % ins[1])
+            return
+    
+    buckets[ins[1]]["name"] = " ".join(ins[2:]).strip()
+    
     display()
 
 # ======================================================
