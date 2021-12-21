@@ -1,6 +1,5 @@
 buckets
 - bucket by 'field field field'
-- bucket rename
 - bk <id> + <id> combine buckets (not numbered)
 - bk <id> - <id> combine buckets (not numbered)
 

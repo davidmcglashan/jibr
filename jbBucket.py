@@ -32,6 +32,10 @@ def bucketf( ins ):
     elif len(ins) >= 3 and ins[0] == 'rename':
         rename( ins )
 
+    # One parameter means display that bucket's contents.
+    elif len(ins) == 1:
+        contents(ins[0])
+
 # =======================================
 # Display the state of the buckets.
 # =======================================
@@ -164,7 +168,7 @@ def copy( ins ):
     display()
 
 # ======================================================
-#  Copy a bucket into a new bucket
+# Rename a bucket
 # ======================================================
 def rename( ins ):
     global buckets
@@ -178,6 +182,20 @@ def rename( ins ):
     buckets[ins[1]]["name"] = " ".join(ins[2:]).strip()
     
     display()
+
+# ======================================================
+# Display the contents of a single bucket
+# ======================================================
+def contents( key ):
+    # No echo means no output
+    if jbEcho.level == 0:
+        return
+
+    # Copy pre-conditions must be met.
+    if key not in buckets:
+        print( "Bucket '%s' does not exist." % key )
+    
+    print( json.dumps( buckets[key], indent=4, sort_keys=True ) )
 
 # ======================================================
 # Clear bucket contents.
