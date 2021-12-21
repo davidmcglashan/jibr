@@ -5,8 +5,7 @@
             "help":     "jbHelp.help",
             "echo":     "jbEcho.echof",
             "quit":     "jbFunc.quit",
-            "q":        "jbFunc.quit",
-            "test":     "jbScript.test"
+            "q":        "jbFunc.quit"
         }
     },
 
