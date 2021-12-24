@@ -1,7 +1,17 @@
 buckets
 - ? where key in bucket
-- payload bucket <id> - show the payload for just the bucket contents
 - look bucket <id> - look's output but the contents are a bucket
+
+vars
+- look and set
+- using in ?
+- using in look
+- using in open
+- using in payload bucket
+- find other places to use
+
+buckets
+- bucket which <term> <var> - match exactly <term> can put the bucket id in <var>
 
 help
 - done as named text files rather than anything too structured
@@ -27,10 +37,6 @@ payloads
 arrays and vars
 - setting from payload
 - viewing
-- combining
-- using in where
-- using in look
-- using in open
 
 keys command to pull keys out of payloads
 - why?

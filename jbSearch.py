@@ -47,7 +47,7 @@ def searchf( ins ):
         if data is None:
             jbEcho.echo( "No data" )
         else:
-            jbPayload.set( json.loads(data.decode("utf-8")) )
+            jbPayload.setf( json.loads(data.decode("utf-8")) )
 
             # If there's a JSON callback, then call it.
             if jsonCb != None:
