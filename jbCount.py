@@ -1,5 +1,6 @@
 from . import jbEcho
 from . import jbFields
+from . import jbFlatten
 from . import jbPayload
 
 import json
@@ -16,7 +17,7 @@ def countf( ins ):
     fcol = jbFields.findPrettyById(column)
 
     # Flatten the payload first.
-    results = jbPayload.flattenf( {column} )
+    results = jbFlatten.flattenf( jbPayload.payload, {column} )
     if results == None:
         return
         

@@ -1,6 +1,7 @@
 import json
 
 from . import jbEcho
+from . import jbFlatten
 from . import jbPayload
 from . import jbSelect
 
@@ -8,6 +9,12 @@ from . import jbSelect
 #  Look inside the current payload and display its contents.
 # ===================================================================
 def lookf( ins ):
+    lookwithkeys( ins, keys=None )
+
+# ===================================================================
+#  Look inside the current payload and display its contents.
+# ===================================================================
+def lookwithkeys( ins, keys=None ):
     # Look does nothing if we're muted.
     if jbEcho.level == 0:
         return
@@ -29,5 +36,5 @@ def lookf( ins ):
             cols.remove( '*' )
 
     # Flatten the results according to the columns and print the results.
-    results = jbPayload.flattenf( cols )
+    results = jbFlatten.flattenf( jbPayload.payload, cols, keys=keys )
     jbEcho.echo( json.dumps( results, indent=4, sort_keys=True ) )

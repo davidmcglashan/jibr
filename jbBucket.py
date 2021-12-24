@@ -1,5 +1,7 @@
 from . import jbEcho
 from . import jbFields
+from . import jbFlatten
+from . import jbLook
 from . import jbPayload
 
 import json
@@ -35,6 +37,10 @@ def bucketf( ins ):
     # Merge two buckets
     elif len(ins) == 3 and ins[1] == '+':
         merge( ins )
+
+    # Look in a bucket
+    elif len(ins) >= 2 and ins[0] == 'look':
+        look( ins )
 
     # One parameter means display that bucket's contents.
     elif len(ins) == 1:
@@ -92,7 +98,7 @@ def by( ins ):
     fcol = jbFields.findPrettyById(column)
 
     # Flatten the payload first.
-    issues = jbPayload.flattenf( {column, "key"} )
+    issues = jbFlatten.flattenf( jbPayload.payload, {column, "key"} )
     if issues == None:
         return
         
@@ -196,6 +202,20 @@ def contents( key ):
         jbEcho.echo( "Bucket '%s' does not exist." % key )
     
     jbEcho.echo( json.dumps( buckets[key], indent=4, sort_keys=True ) )
+
+# ==========================================================
+#  Look inside a bucket. Uses the same columns as jbSelect.
+# ==========================================================
+def look( ins ):
+    if ins[1] not in buckets:
+        jbEcho.echo( "Bucket '%s' does not exist." % ins[1] )
+        return
+
+    # Chop the params to add columns to the look
+    cols = ins[2:]
+    print( cols )
+
+    jbLook.lookwithkeys( cols, buckets[ins[1]]['keys'] )
 
 # ======================================================
 # Clear bucket contents.
