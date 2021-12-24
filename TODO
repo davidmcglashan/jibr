@@ -1,5 +1,4 @@
 buckets
-- ? where key in bucket
 - look bucket <id> - look's output but the contents are a bucket
 
 vars

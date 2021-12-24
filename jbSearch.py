@@ -54,7 +54,7 @@ def searchf( ins ):
                 jsonCb( url, jbPayload.payload )
 
             if jbEcho.level == 3:
-                jbPayload.payloadf()
+                jbPayload.displayf()
 
             if jbEcho.level > 0:
                 if "issues" in jbPayload.payload:
