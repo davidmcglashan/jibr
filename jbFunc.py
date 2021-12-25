@@ -24,10 +24,11 @@ try:
                     jbEcho.echo( "No help has been provided for '%s'" % cmdkey )
 
 except( FileNotFoundError ):
-    jbEcho.echo( "commands.json file not found!", 1 )
+    jbEcho.echo( "commands.json file not found!", 0 )
     exit()
-except( JSONDecodeError ):
-    jbEcho.echo( "Something wrong with commands.json. Check its JSON structure is okay.", 1 )
+except( JSONDecodeError ) as e:
+    jbEcho.echo( "Something wrong with commands.json. Check its JSON structure is okay.", 0 )
+    jbEcho.echo( e, 0 )
     exit()
 
 # ===================================
