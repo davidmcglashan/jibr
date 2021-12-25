@@ -7,6 +7,7 @@ vars
 
 buckets
 - bucket match <term> <var> - match exactly <term> can put the bucket id in <var>
+- bucket payload <id> - turn the bucket into the payload - short hand for '? key in bucket[id]'
 
 help
 - done as named text files rather than anything too structured

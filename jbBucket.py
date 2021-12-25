@@ -42,6 +42,10 @@ def bucketf( ins ):
     elif len(ins) >= 2 and ins[0] == 'look':
         look( ins )
 
+    # Match a bucket
+    elif len(ins) >= 2 and ins[0] == 'match':
+        match( ins[1:] )
+
     # One parameter means display that bucket's contents.
     elif len(ins) == 1:
         contents(ins[0])
@@ -216,6 +220,27 @@ def look( ins ):
     print( cols )
 
     jbLook.lookwithkeys( cols, buckets[ins[1]]['keys'] )
+
+# ==========================================================
+#  Match what has been passed in with a bucket id
+# ==========================================================
+def match( ins ):
+    # One parameter means find the bucket and look in it
+    if len(ins) == 1:
+        bucket = matchbyname( ins[0] )
+        if bucket == None:
+            jbEcho.echo( "Bucket '%s' does not exist." % ins[0] )
+            return
+        jbLook.lookwithkeys( list(), bucket['keys'] )
+
+# ==========================================================
+#  Match a bucket by its name.
+# ==========================================================
+def matchbyname( name ):
+    for bucket in buckets.values():
+        if bucket['name'] == name:
+            return bucket
+    return name
 
 # ======================================================
 # Clear bucket contents.
