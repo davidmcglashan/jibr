@@ -55,5 +55,12 @@
             "bucket":   "jbBucket.bucketf",
             "bk":       "jbBucket.bucketf"
         }
+    },
+
+    {
+        "name": "Working with variables",
+        "commands": {
+            "var": "jbVar.varf"
+        }
     }
 ]
