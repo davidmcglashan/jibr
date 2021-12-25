@@ -1,13 +1,12 @@
 vars
-- look and set
 - using in ?
 - using in look
 - using in open
-- using in payload bucket
+- using in bucket match 'bucket match <var> <bid>'
 - find other places to use
 
 buckets
-- bucket which <term> <var> - match exactly <term> can put the bucket id in <var>
+- bucket match <term> <var> - match exactly <term> can put the bucket id in <var>
 
 help
 - done as named text files rather than anything too structured
