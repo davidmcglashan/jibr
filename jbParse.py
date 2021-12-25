@@ -1,5 +1,6 @@
 from . import jbBucket
 from . import jbFields
+from . import jbVar
 
 # ===================================================================
 #  Look inside the current payload and display its contents.
@@ -24,6 +25,8 @@ def parse( ins ):
 
         # Don't know what this word is so just include it in the query.
         else:
+            # Might be a variable so do a quick look-up substitution.
+            word = jbVar.get( word )
             words.append( word )
 
     # Get some URL safe spaces in there.
