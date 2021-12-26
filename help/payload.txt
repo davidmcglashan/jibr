@@ -1,0 +1,12 @@
+---------------------------------------
+payload (bucket [bucket id])
+---------------------------------------
+Payloads are obtained from conducting searches. They are the JSON obtained from the remote Jira instance and are cached by JIBR and used for commands like 'look' and 'bucket'. This command allows a human inspection of the search results JSON.
+
+Usage ...
+---------
+  > payload
+  Displays the most recent payload. This will be in JSON format. It might be very big.
+
+  > payload bucket [bucket id]
+  Displays the issues in the payload with keys corresponding to the keys in the identified bucket.

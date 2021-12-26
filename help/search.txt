@@ -1,0 +1,36 @@
+---------------------------------------
+search [jql ...]
+---------------------------------------
+Conduct a search for issues on the remote Jira using the same Jira query language (JQL) as Jira uses for its own filters and searches. 
+
+More on JQL at ...
+  https://www.atlassian.com/blog/jira-software/jql-the-most-flexible-way-to-search-jira-14 
+
+Usage ...
+---------
+  > search project = abc
+  Find all the issues in the 'ABC' project.
+
+  > search assignee = fred.bloggs
+  Find all the issues assigned to the Fred Bloggs user.
+
+  > search type = epic and status = open
+  Find all the open Epics.
+
+Alias ...
+---------
+  > ?
+
+Buckets ...
+-----------
+bucket[id] is a pseudofunction which is replaced with a comma-separated list of bucket keys, surrounded in braces, from the bucket whose id matches the string in [], before the JQL is sent to the remote server.
+
+  > search key in bucket[0]
+  Find all the issues whose keys correspond with those in bucket[0]. 
+
+Variables ...
+-----------
+Any word in the JQL matching a variable name is substituted for the variable value before the JQL is sent.
+
+  > search foo = bar
+  This search would work if 'foo' was a variable whose value was 'project' and 'bar' was a variable whose value matched a project key on the remote Jira. 
