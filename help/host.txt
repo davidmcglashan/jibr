@@ -1,0 +1,9 @@
+---------------------------------------
+host
+---------------------------------------
+Reports the hostname and port being used to communicate with the remote Jira service.
+
+Usage ...
+---------
+  > host
+  Reports the hostname and port currently being used

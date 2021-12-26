@@ -1,0 +1,9 @@
+---------------------------------------
+fields
+---------------------------------------
+Loads field metadata from Jira. This is will provide look up tables for pretty names, system names and easy to type names for Jira's fields.
+
+Usage ...
+---------
+  > fields
+  Load field metadata

@@ -1,0 +1,12 @@
+---------------------------------------
+hostname ([host])
+---------------------------------------
+Sets or displays the hostname of the remote Jira instance. This is the hostname as one would use in a URL e.g. localhost or github.io. This hostname is used in subsequent commands to contact the remote service.
+
+Usage ...
+---------
+  > hostname [host]
+  Set the hostname
+
+  > hostname
+  Reports the hostname currently being used

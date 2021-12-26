@@ -1,0 +1,12 @@
+---------------------------------------
+port ([number])
+---------------------------------------
+Sets or displays the port number of the remote Jira instance. This is the port number as one would use in a URL e.g. 8080 or 8443. The port number is used in subsequent commands to contact the remote service. Its default value is 80
+
+Usage ...
+---------
+  > port [number]
+  Set the port number
+
+  > port
+  Reports the port number currently being used

@@ -1,0 +1,14 @@
+---------------------------------------
+startat ([number])
+---------------------------------------
+Sets or displays the number of the result which is the first to be returned in searches. Pagination of search results is achieved using this command and 'maxresults'.
+
+The default value is 0.
+
+Usage ...
+---------
+  > startat [number]
+  Set the starting number for search results to [number]
+
+  > startat
+  Reports the current starting number for search results.

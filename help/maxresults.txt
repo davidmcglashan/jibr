@@ -1,0 +1,14 @@
+---------------------------------------
+maxresults ([number])
+---------------------------------------
+Sets or displays the maximum number of results being returned in searches. Pagination of search results is achieved using this command and 'startat'.
+
+The default value is 50.
+
+Usage ...
+---------
+  > maxresults [number]
+  Set the maximum number of results to [number]
+
+  > maxresults
+  Reports the current maximum number of results returned

@@ -1,0 +1,9 @@
+---------------------------------------
+jira [key]
+---------------------------------------
+Opens a single issue record from the remote jira in your web browser.
+
+Usage ...
+---------
+  > jira [key]
+  Open an issue in your web browser, e.g. > jira abc-1

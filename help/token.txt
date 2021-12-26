@@ -1,0 +1,15 @@
+---------------------------------------
+token ([token])
+---------------------------------------
+Sets or displays the personal access token (PAT) being used to authenticate with the remote Jira instance. A PAT is submitted with every request and so this must be set before communication will be successful.
+
+More about PATs here ...
+  https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html
+
+Usage ...
+---------
+  > token [token]
+  Set the PAT being used
+
+  > token
+  Reports the token in use. For security reasons, not all of the PAT is shown

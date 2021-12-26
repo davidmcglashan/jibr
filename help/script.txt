@@ -1,0 +1,13 @@
+---------------------------------------
+script [file]
+---------------------------------------
+Open a text file and treat its line as instructions, executing them one after the other.
+
+Usage ...
+---------
+  > script [file]
+  Executes the instructions in [file]
+
+Alias ...
+---------
+  > x
