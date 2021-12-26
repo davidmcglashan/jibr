@@ -36,7 +36,7 @@ def help( ins ):
     if len(ins) == 0:
         jbEcho.echo( "Available commands ...")
 
-        for block in jbFunc.supported:
+        for block in jbFunc.structured:
             jbEcho.echo()
             jbEcho.echo( "  %s" % block["name"] )
             for cmd in block["commands"]:
@@ -45,7 +45,7 @@ def help( ins ):
     # More params means try and do some reflection to call a help function that
     # might tell us more ...
     else:
-        for block in jbFunc.supported:
+        for block in jbFunc.structured:
             if ins[0] in block["commands"]:
                 try:
                     filename = os.path.join( os.path.dirname(__file__), "help/%s.txt" % ins[0])

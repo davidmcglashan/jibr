@@ -16,7 +16,7 @@ class TestHelp( unittest.TestCase ):
     def test_help_help( self ):
         jbEcho.testmode()
         jbFunc.parse( "help help" )
-        self.assertEqual( jbEcho.lastEcho, "  Provides help about [command]." )
+        self.assertEqual( jbEcho.lastEcho, "  Provides help about [command]" )
 
 if __name__ == '__main__':
     unittest.main()

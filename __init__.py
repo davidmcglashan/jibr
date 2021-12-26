@@ -2,7 +2,7 @@
 from .jbFunc import parse
 
 # Commands returns all the available commands in a list.
-from .jbFunc import commands
+from .jbFunc import commandsf as commands
 
 # Grant external access to any useful things we encounter.
 from .jbSearch import searchCallback

@@ -4,8 +4,10 @@
         "commands": {
             "help":     "jbHelp.help",
             "echo":     "jbEcho.echof",
-            "quit":     "jbFunc.quit",
-            "q":        "jbFunc.quit"
+            "quit": {
+                "function": "jbFunc.quit",
+                "alias":    "q"
+            }
         }
     },
 
@@ -23,8 +25,10 @@
     {
         "name": "Executing a script file",
         "commands": {
-            "script":   "jbScript.script",
-            "x":        "jbScript.script"
+            "script": {
+                "function": "jbScript.script",
+                "alias":    "x"
+            }
         }
     },
 
@@ -38,8 +42,10 @@
     {
         "name": "Quick searching with JQL",
         "commands": {
-            "search":       "jbSearch.searchf",
-            "?":            "jbSearch.searchf",
+            "search": {
+                "function": "jbSearch.searchf",
+                "alias":    "?"
+            },
             "startat":      "jbSearch.startAtf",
             "maxresults":   "jbSearch.maxResultsf",
             "select":       "jbSelect.columnsf"
@@ -52,8 +58,10 @@
             "payload":  "jbPayload.payloadf",
             "look":     "jbLook.lookf",
             "count":    "jbCount.countf",
-            "bucket":   "jbBucket.bucketf",
-            "bk":       "jbBucket.bucketf"
+            "bucket": {
+                "function": "jbBucket.bucketf",
+                "alias":    "bk" 
+            } 
         }
     },
 
