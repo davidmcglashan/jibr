@@ -1,7 +1,3 @@
-output
-- output <file> replaces/augments jbEcho.echo with a file
-- output - stops the output and closes the file
-
 vars
 - using in open
 - using in bucket match 'bucket match <var> <bid>'
@@ -38,4 +34,3 @@ arrays and vars
 
 keys command to pull keys out of payloads
 - why?
-
