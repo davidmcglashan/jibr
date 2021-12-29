@@ -60,6 +60,8 @@ def parse( inpts ):
     if inpt[0] == '':
         return
 
+    print( inpt )
+
     # Check that this is a supported method
     if inpt[0] not in commands:
         jbEcho.echo( "No such command '%s'" % inpt[0], 1 )
@@ -81,8 +83,13 @@ def parse( inpts ):
     sig = signature( function )
     if len(sig.parameters) == 0:
         function()
-    else:
-        function(inpt[1:])
+    
+    # Remove all the empty strings that creep in if you press space after your command.
+    trimmed = list()
+    for word in inpt[1:]:
+        if len( word ) > 0:
+            trimmed.append( word.strip() )
+    function( trimmed )
 
 # ===================================
 #  A quit method.
