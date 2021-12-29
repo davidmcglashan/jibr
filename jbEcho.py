@@ -54,9 +54,12 @@ def echo( string='', displayLevel=1 ):
 
         # If there's also a file on the go then append to that as well.
         if file != None:
-            with open( file, filemode ) as f:
-                f.write( string )
-                f.write( '\n' )
+            try:
+                with open( file, filemode ) as f:
+                    f.write( string )
+                    f.write( '\n' )
+            except FileNotFoundError:
+                output( "Unable to write to '%s'" % file )
 
 # ===================================
 #  Send subsequent echoes to a file
