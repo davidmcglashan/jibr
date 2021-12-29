@@ -6,13 +6,16 @@ from . import jbPayload
 from . import jbSelect
 
 # ===================================================================
-#  Look inside the current payload and display its contents.
+#  Look inside the current payload and display its contents as JSON
 # ===================================================================
 def lookf( ins ):
-    lookwithkeys( ins, keys=None )
+    results = lookwithkeys( ins, keys=None )
+    jbEcho.echo( json.dumps( results, indent=4, sort_keys=True ) )
 
 # ===================================================================
 #  Look inside the current payload and display its contents.
+#  - ins: usually a list of columns to show from the payload
+#  - keys: limit the look to only records matching these keys.
 # ===================================================================
 def lookwithkeys( ins, keys=None ):
     # Look does nothing if we're muted.
@@ -23,7 +26,7 @@ def lookwithkeys( ins, keys=None ):
         jbEcho.echo( "No recent search to look at" )
         return
 
-    # If not columns were passed in then use the ones defined in select.
+    # If no columns were passed in then use the ones defined in select.
     cols = set()
     if len(ins) > 0:
         cols.update( ins )
@@ -35,6 +38,6 @@ def lookwithkeys( ins, keys=None ):
         if '*' in cols:
             cols.remove( '*' )
 
-    # Flatten the results according to the columns and print the results.
+    # Flatten the results according to the columns and return the results.
     results = jbFlatten.flattenf( jbPayload.payload, cols, keys=keys )
-    jbEcho.echo( json.dumps( results, indent=4, sort_keys=True ) )
+    return results
