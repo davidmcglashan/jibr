@@ -1,0 +1,14 @@
+---------------------------------------
+look [fields ...]
+---------------------------------------
+Reports the current payload in a simplified JSON format. This is handy when using data with other JSON consumers, or for simply having a quick look inside the payload.
+
+You can specify fields to reduce the amount of data shown and to allow focus,
+
+Usage ...
+---------
+  > look
+  Displays the current payload in JSON format. The displayed fields are limited to the range defined by 'select'.
+
+  > look key summary assignee
+  Displays the key, summary and assignee fields from the current payload in JSON format. Those fields must have been used in a prior select and therefore be already in the payload to be effective.

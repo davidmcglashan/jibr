@@ -1,5 +1,13 @@
+csv
+- csv command - look with CSV output
+- proper , escaping
+- bucket csv <id>
+
+output
+- output <file> replaces/augments jbEcho.echo with a file
+- output - stops the output and closes the file
+
 vars
-- using in look
 - using in open
 - using in bucket match 'bucket match <var> <bid>'
 - find other places to use

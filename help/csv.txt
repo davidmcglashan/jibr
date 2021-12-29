@@ -1,0 +1,14 @@
+---------------------------------------
+csv [fields ...]
+---------------------------------------
+Functionally equivalent to 'look' but displays its output as CSV instead of JSON. This is handy when using data with things like Excel.
+
+The CSV format used here is quite crude. Any double-quote characters (") present in the data will be removed. Any commas (,) present in the data is escaped by wrapping the string in double-quotes. This feature isn't intended for lossless data transport, instead it should be considered a quick and dirty export feature.
+
+Usage ...
+---------
+  > csv
+  Displays the current payload in CSV format. Field selection is limited to the range defined by 'select'.
+
+  > csv key summary assignee
+  Displays the key, summary and assignee fields from the current payload in CSV format. Those fields must have been used in a prior select and therefore be already in the payload to be effective.

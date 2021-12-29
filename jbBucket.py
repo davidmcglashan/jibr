@@ -1,3 +1,4 @@
+from . import jbCsv
 from . import jbEcho
 from . import jbFields
 from . import jbFlatten
@@ -41,6 +42,10 @@ def bucketf( ins ):
     # Look in a bucket
     elif len(ins) >= 2 and ins[0] == 'look':
         look( ins )
+
+    # Look in a bucket and csv the results
+    elif len(ins) >= 2 and ins[0] == 'csv':
+        csv( ins )
 
     # Match a bucket
     elif len(ins) >= 2 and ins[0] == 'match':
@@ -217,9 +222,23 @@ def look( ins ):
 
     # Chop the params to add columns to the look
     cols = ins[2:]
-    print( cols )
 
-    jbLook.lookwithkeys( cols, buckets[ins[1]]['keys'] )
+    jsn = jbLook.lookwithkeys( cols, buckets[ins[1]]['keys'] )
+    jbEcho.echo( json.dumps( jsn, indent=4, sort_keys=True ) )
+
+# ==========================================================
+#  Look inside a bucket and display the contents as CSV.
+# ==========================================================
+def csv( ins ):
+    if ins[1] not in buckets:
+        jbEcho.echo( "Bucket '%s' does not exist." % ins[1] )
+        return
+
+    # Chop the params to add columns to the look
+    cols = ins[2:]
+
+    jsn = jbLook.lookwithkeys( cols, buckets[ins[1]]['keys'] )
+    jbCsv.csvwithlook( jsn )
 
 # ==========================================================
 #  Match what has been passed in with a bucket id
@@ -231,7 +250,8 @@ def match( ins ):
         if bucket == None:
             jbEcho.echo( "Bucket '%s' does not exist." % ins[0] )
             return
-        jbLook.lookwithkeys( list(), bucket['keys'] )
+        jsn = jbLook.lookwithkeys( list(), bucket['keys'] )
+        jbEcho.echo( json.dumps( jsn, indent=4, sort_keys=True ) )
 
 # ==========================================================
 #  Match a bucket by its name.

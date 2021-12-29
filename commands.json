@@ -57,6 +57,7 @@
         "commands": {
             "payload":  "jbPayload.payloadf",
             "look":     "jbLook.lookf",
+            "csv":      "jbCsv.csvf",
             "count":    "jbCount.countf",
             "bucket": {
                 "function": "jbBucket.bucketf",
