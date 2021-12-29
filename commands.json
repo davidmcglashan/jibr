@@ -71,5 +71,12 @@
         "commands": {
             "var": "jbVar.varf"
         }
+    },
+
+    {
+        "name": "Writing files",
+        "commands": {
+            "write": "jbEcho.writef"
+        }
     }
 ]

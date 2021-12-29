@@ -7,6 +7,8 @@
 level = 2
 output = print
 lastEcho = None
+file = None
+filemode = 'w'
 
 # ==========================================================
 # This function replaces print() when test mode is enabled.
@@ -49,3 +51,33 @@ def echo( string='', displayLevel=1 ):
         output( string )
         global lastEcho
         lastEcho = string
+
+        # If there's also a file on the go then append to that as well.
+        if file != None:
+            with open( file, filemode ) as f:
+                f.write( string )
+                f.write( '\n' )
+
+# ===================================
+#  Send subsequent echoes to a file
+# ===================================
+def writef( ins ):
+    global file
+    global filemode
+
+    # No params means the write is complete.
+    if len(ins) == 0:
+        output( "Finished writing to %s" % file )
+        file = None;
+
+    # Append mode
+    elif len(ins) == 2 and ins[0] == 'append':
+        file = ins[1]
+        filemode = 'a'
+        output( "Now appending to %s" % file )
+
+    # Write mode
+    else:
+        file = ins[0]
+        filemode = 'w'
+        output( "Now writing to %s" % file )
