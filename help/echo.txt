@@ -1,6 +1,6 @@
----------------------------------------
-echo (on|off|[level])
----------------------------------------
+-------------------------------------------
+echo ( on|off|[level]]|file stop|append|([filename]) )
+-------------------------------------------
 Changes the output threshold for text being written to the console. Output can be suppressed or changed to provide different levels of detail.
 
 There are four levels ...
@@ -8,6 +8,8 @@ There are four levels ...
  1 - Minimal - only commands whose intent is to display (e.g. look, help) display something.
  2 - Normal - Some "commentary" is provided
  3 - Everything - Includes network chatter and debug.
+
+Echo output can be sent to a file instead of the console. The chosen file can be overwritten or appended to using the append flag in the command.
 
 Usage ...
 ---------
@@ -22,3 +24,12 @@ Usage ...
 
   > echo off
   Sets the current level to 1
+
+  > echo file foo.txt
+  Subsequent echoes are written to foo.txt
+
+  > echo file append foo.txt
+  Subsequent echoes are appended to the bottom of foo.txt, preserving the file's current contents.
+
+  > echo file stop
+  Echoes are sent to the console and no longer to an open file.

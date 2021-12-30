@@ -41,7 +41,7 @@ def echof( ins ):
         level = 0
     elif len(ins) == 1 and ins[0] == "3":
         level = 3
-    elif len(ins) == 2 and ins[0] == "file":
+    elif len(ins) >= 2 and ins[0] == "file":
         writef( ins[1:] )
         return
 
