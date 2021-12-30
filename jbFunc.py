@@ -60,8 +60,6 @@ def parse( inpts ):
     if inpt[0] == '':
         return
 
-    print( inpt )
-
     # Check that this is a supported method
     if inpt[0] not in commands:
         jbEcho.echo( "No such command '%s'" % inpt[0], 1 )

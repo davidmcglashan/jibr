@@ -14,6 +14,7 @@ filemode = 'w'
 # This function replaces print() when test mode is enabled.
 # ==========================================================
 def mute( string ):
+    print( string )
     pass
 
 # ==========================================================
@@ -40,6 +41,9 @@ def echof( ins ):
         level = 0
     elif len(ins) == 1 and ins[0] == "3":
         level = 3
+    elif len(ins) == 2 and ins[0] == "file":
+        writef( ins[1:] )
+        return
 
     echo( "Echo level is %s" % level )
 
@@ -47,19 +51,25 @@ def echof( ins ):
 # Echo some text if the current level exceeds or equals the optional displayLevel.
 # =================================================================================
 def echo( string='', displayLevel=1 ):
+    global filemode
+    global lastEcho
+
     if level >= displayLevel:
-        output( string )
-        global lastEcho
         lastEcho = string
 
-        # If there's also a file on the go then append to that as well.
+        # If there's a file on the go then write to that ...
         if file != None:
             try:
                 with open( file, filemode ) as f:
                     f.write( string )
                     f.write( '\n' )
+                    filemode = 'a'
             except FileNotFoundError:
                 output( "Unable to write to '%s'" % file )
+
+        # ... otherwise use the output function.
+        else:
+            output( string )
 
 # ===================================
 #  Send subsequent echoes to a file
@@ -69,7 +79,7 @@ def writef( ins ):
     global filemode
 
     # No params means the write is complete.
-    if len(ins) == 0:
+    if len(ins) == 1 and ins[0] == 'stop':
         output( "Finished writing to %s" % file )
         file = None;
 

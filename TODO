@@ -7,25 +7,19 @@ buckets
 - bucket match <term> <var> - match exactly <term> can put the bucket id in <var>
 - bucket payload <id> - turn the bucket into the payload - short hand for '? key in bucket[id]'
 
-help
-- done as named text files rather than anything too structured
-
 issue
 - issue <key> - displays a single record based on jbselect columns
 
 buckets
 - bucket by 'field field field'
-- bk <id> - <id> combine buckets (not numbered)
+- bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
 
 count
 - order by count asc/desc
 - order by field asc/desc
 
 payloads
-- save
 - append
-- export json
-- export csv (excel)
 - jira payload - open the payload's keys in a search: key in ()
 
 arrays and vars
@@ -34,3 +28,9 @@ arrays and vars
 
 keys command to pull keys out of payloads
 - why?
+
+things to do
+- empty epics
+- running filters
+- managing filters
+- parser to turn 'ins' into a list of strings where " has joined multiple words together, etc.
