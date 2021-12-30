@@ -8,7 +8,7 @@ import webbrowser
 
 hostname = None
 port = 80
-accessToken = "No Access Token"
+_accessToken = "No Access Token"
 
 # =======================================
 # Print or set the host
@@ -48,12 +48,18 @@ def host():
 # Print or set the current access token
 # ===================================
 def token( ins ):
-    global accessToken
+    global _accessToken
 
     if len(ins) == 1: 
-        accessToken = "Bearer " + ins[0]
+        _accessToken = ins[0]
 
-    jbEcho.echo( accessToken[0:20] + '...', 1 )
+    jbEcho.echo( "Access token is " + _accessToken[0:12] + '...', 1 )
+
+# =============================================
+# Adds the access token to the passed in dict.
+# =============================================
+def addAuthHeader( headers ):
+    headers[ "Authorization"] = "Bearer " + _accessToken
 
 # =============================================
 # Open the supplied key(s) in Jira on the web. 

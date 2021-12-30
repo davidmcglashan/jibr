@@ -35,9 +35,8 @@ def searchf( ins ):
     jbEcho.echo( url, 2 )
 
     # Make the HTTP request and get back a response
-    headers = {
-        "Authorization": jbHost.accessToken
-    }
+    headers = dict()
+    jbHost.addAuthHeader( headers )
     conn.request( "GET", url, headers=headers)
     response = conn.getresponse()
 
