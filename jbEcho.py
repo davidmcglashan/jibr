@@ -14,7 +14,6 @@ filemode = 'w'
 # This function replaces print() when test mode is enabled.
 # ==========================================================
 def mute( string ):
-    print( string )
     pass
 
 # ==========================================================
