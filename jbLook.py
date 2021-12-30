@@ -9,6 +9,10 @@ from . import jbSelect
 #  Look inside the current payload and display its contents as JSON
 # ===================================================================
 def lookf( ins ):
+    # Look does nothing if we're muted.
+    if jbEcho.level == 0:
+        return
+
     results = lookwithkeys( ins, keys=None )
     jbEcho.echo( json.dumps( results, indent=4, sort_keys=True ) )
 
@@ -18,10 +22,6 @@ def lookf( ins ):
 #  - keys: limit the look to only records matching these keys.
 # ===================================================================
 def lookwithkeys( ins, keys=None ):
-    # Look does nothing if we're muted.
-    if jbEcho.level == 0:
-        return
-
     if jbPayload.payload == None or "issues" not in jbPayload.payload:
         jbEcho.echo( "No recent search to look at" )
         return
