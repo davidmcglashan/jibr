@@ -70,7 +70,7 @@ def jiraf( ins ):
         return
 
     # The 'search' keyword opens a Jira search URL
-    elif len(ins) == 1 and ins[0] == 'search':
+    elif len(ins) == 1 and (ins[0] == 'search' or ins[0] == '?'):
         url = "https://%s:%s/issues/?jql=%s" % (hostname,port,jbParse.parse(jbSearch.previousIns))
         jbWeb.open( url )
 

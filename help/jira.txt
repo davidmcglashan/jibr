@@ -1,9 +1,14 @@
 ---------------------------------------
 jira [key]
 ---------------------------------------
-Opens a single issue record from the remote jira in your web browser.
+Opens a page from the remote jira in your web browser. Pages can be a single issue or a search.
 
 Usage ...
 ---------
   > jira [key]
   Open an issue in your web browser, e.g. > jira abc-1
+
+  > jira search
+  or
+  > jira ?
+  Opens the last search in Jira
