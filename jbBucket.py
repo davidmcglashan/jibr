@@ -260,7 +260,7 @@ def matchbyname( name ):
     for bucket in buckets.values():
         if bucket['name'] == name:
             return bucket
-    return name
+    return None
 
 # ======================================================
 # Clear bucket contents.

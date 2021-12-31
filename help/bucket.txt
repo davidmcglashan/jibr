@@ -1,0 +1,65 @@
+---------------------------------------
+bucket by [field]
+---------------------------------------
+Breaks payload results into buckets by the values of named fields. Buckets can then be counted, reported and manipulated further as a means of performing rudimentary analysis.
+
+Buckets created from payload results are assigned numeric ids. Numbered buckets are created anew every time 'bucket by' is called.
+
+Usage ...
+---------
+  > bucket by [field]
+  Create a new set of numbered buckets from the payload based on the value of field. The field must be present in the payload, having been included in select before the last search. A summary of the buckets is shown.
+
+  > bucket by project
+  Buckets the payload by the project field.
+
+  > bucket
+  Displays a summary of all the current buckets.
+
+Inspecting bucket contents ...
+------------------------------
+  > bucket [id]
+  Displays, in a simple JSON format, the bucket name and the keys of the issues stored in the bucket whose id matches [id]
+
+  > bucket look [id] ([fields ...])
+  Display the bucket contents in simple JSON using data from the payload and the optional list of fields.
+
+  > bucket look 1
+  Look in bucket 1, displaying all the select fields.
+
+  > bucket look 1 key assignee
+  Look in bucket 1, displaying the key and assignee fields.
+
+  > bucket csv [id] ([fields ...])
+  Functionally equivalent to 'bucket look' but the output format is CSV and not JSON.
+
+Clearing buckets ...
+--------------------
+  > bucket clear ([id]|all)
+  Removes all or individual buckets.
+
+  > bucket clear
+  Deletes all the numbered buckets, effectively forgetting the buckets arising from the last searched. Buckets with non-numeric ids are not cleared.
+
+  > bucket clear all
+  Deletes every bucket, numbered or otherwise.
+
+  > bucket clear [id]
+  Deletes the bucket whose id matches [id]. Numbered buckets cannot be cleared in this manner.
+
+Renaming a bucket ...
+----------------------
+  > bucket rename [id] [new name ...]
+  Changes the name value associated with a bucket. Note that this does not change a bucket's id.
+
+Manipulating buckets ...
+------------------------
+  > bucket copy [id] [new id] ([new name])
+  Copies bucket [id] into a new bucket with the id [new id] and the optional new name [new name]. [new id] must be non-numeric and not already present.
+
+  > bucket [id] + [from]
+  Copies the contents of bucket [from] into bucket [id]. Duplicates are not preserved in the destination bucket. The [from] bucket is not modified.
+
+Alias ...
+---------
+  > bk
