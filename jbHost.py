@@ -3,8 +3,7 @@ from . import jbEcho
 from . import jbPayload
 from . import jbSearch
 from . import jbParse
-
-import webbrowser
+from . import jbWeb
 
 hostname = None
 port = 80
@@ -73,14 +72,12 @@ def jiraf( ins ):
     # The 'search' keyword opens a Jira search URL
     elif len(ins) == 1 and ins[0] == 'search':
         url = "https://%s:%s/issues/?jql=%s" % (hostname,port,jbParse.parse(jbSearch.previousIns))
-        jbEcho.echo( url, 2 )
-        webbrowser.open( url )
+        jbWeb.open( url )
 
     # 1 key we can open directly on the record.
     elif len(ins) == 1:
         url = "https://%s:%s/browse/%s" % (hostname,port,ins[0])
-        jbEcho.echo( url, 2 )
-        webbrowser.open( url )
+        jbWeb.open( url )
 
     # The 'bucket' keyword opens a Jira search with the bucket's keys passed into the JQL
     elif len(ins) == 2 and ins[0] == 'bucket':
@@ -89,6 +86,4 @@ def jiraf( ins ):
             return
 
         url = "https://%s:%s/issues/?jql=key in (%s)" % (hostname,port,",".join(keys))
-
-        jbEcho.echo( url, 2 )
-        webbrowser.open( url )
+        jbWeb.open( url )
