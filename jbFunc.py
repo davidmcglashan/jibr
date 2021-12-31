@@ -29,11 +29,6 @@ try:
                 if type(val) == type( str() ):
                     commands[command] = val
 
-                    # Quickly check to see if there is a help file for this command.
-                    helpfile = os.path.join( os.path.dirname(__file__), "help/%s.txt" % command )
-                    if not os.path.isfile( helpfile ):
-                        jbEcho.echo( "No help has been provided for '%s'" % command )
-
                 # ... or a block/dict in aliased ones ...
                 elif type(val) == type(dict()):
                     # fish the details out of the dict ...
@@ -43,6 +38,11 @@ try:
                     # ... then replace it in the collection with strings!
                     commands[alias] = function
                     commands[command] = function
+
+                # Quickly check to see if there is a help file for this command.
+                helpfile = os.path.join( os.path.dirname(__file__), "help/%s.txt" % command )
+                if not os.path.isfile( helpfile ):
+                    jbEcho.echo( "No help has been provided for '%s'" % command )
 
 except( FileNotFoundError ):
     jbEcho.echo( "commands.json file not found!", 0 )
