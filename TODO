@@ -31,6 +31,7 @@ keys command to pull keys out of payloads
 
 things to do
 - empty epics
+- open epics with all closed stories
 - running filters
 - managing filters
 - parser to turn 'ins' into a list of strings where " has joined multiple words together, etc.
