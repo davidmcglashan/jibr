@@ -5,7 +5,7 @@ from . import jbSearch
 from . import jbParse
 from . import jbWeb
 
-hostname = None
+hostname = 'localhost'
 port = 80
 _accessToken = "No Access Token"
 

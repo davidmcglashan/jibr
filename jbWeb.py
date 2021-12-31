@@ -14,7 +14,7 @@ def mute( string ):
 # Test mode replaces print() with the mute function above.
 # ==========================================================
 def testmode( enabled=True ):
-    global output
+    global openf
     if enabled:
         openf = mute
     else:
@@ -24,5 +24,8 @@ def testmode( enabled=True ):
 #  Open a web URL in the system browser.
 # ==========================================
 def open( url ):
+    global lastUrl
+    lastUrl = url
+
     jbEcho.echo( url, 2 )
     openf( url )
