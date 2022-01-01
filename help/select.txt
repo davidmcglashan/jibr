@@ -1,0 +1,25 @@
+---------------------------------------
+select (+|-) ([fields ...])
+---------------------------------------
+Manage the fields retrieved by a query. Fields are added using their easy to type names, e.g. epic-link, fix-versions.
+
+Usage ...
+---------
+  > select
+  Reports the current field selection.
+
+  > select [fields ...]
+  Replaces the current field selection with the fields stated here. More than one field can be specified.
+
+  > select key assignee status
+  Replaces the current field selection with key, assignee and status.
+
+  > select + epic-link
+  Adds "Epic Link" to the current field selection.
+
+  > select - assignee
+  Removes assignee from the current field selection.
+
+  > select --
+  Removes all the fields and sets the field selection back to the defaults.
+  

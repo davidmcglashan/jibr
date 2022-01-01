@@ -1,3 +1,5 @@
+select * crashes on ?
+
 vars
 - using in open
 - using in bucket match 'bucket match <var> <bid>'
@@ -20,7 +22,8 @@ count
 - order by field asc/desc
 
 payloads
-- append
+- append with ?
+- append with pagination
 - jira payload - open the payload's keys in a search: key in ()
 
 arrays and vars
