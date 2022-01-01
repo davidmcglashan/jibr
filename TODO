@@ -11,6 +11,7 @@ issue
 - issue <key> - displays a single record based on jbselect columns
 
 buckets
+- improvements to match
 - bucket by 'field field field'
 - bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
 
