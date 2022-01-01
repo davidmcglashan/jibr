@@ -1,5 +1,8 @@
 select * crashes on ?
 
+payloads
+- payload fetch - look at startat and maxr in the payload and load all the outstanding pages.
+
 vars
 - using in open
 - using in bucket match 'bucket match <var> <bid>'
@@ -23,7 +26,6 @@ count
 
 payloads
 - append with ?
-- append with pagination
 - jira payload - open the payload's keys in a search: key in ()
 
 arrays and vars

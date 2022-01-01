@@ -1,0 +1,12 @@
+---------------------------------------
+var ([id] = [value ...])
+---------------------------------------
+Variables can be assigned to remember key data that can be reused in queries and as input to other commands.
+
+Usage ...
+---------
+  > var
+  Displays a summary of variables and their current values
+
+  > var foo = bar
+  Sets the value of the variable 'foo' to 'bar'

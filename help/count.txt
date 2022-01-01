@@ -1,0 +1,11 @@
+---------------------------------------
+count [field]
+---------------------------------------
+Analyses the current payload by taking a single field and providing counts of its values in a simplified JSON format. This is handy for quickly looking inside the payload.
+
+A payload, and hence a prior search, is required for this command.
+
+Usage ...
+---------
+  > count status
+  Counts the results in the payload matching each status
