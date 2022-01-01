@@ -21,6 +21,8 @@ buckets
 - bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
 
 count
+- having > 50
+- count into bucket
 - order by count asc/desc
 - order by field asc/desc
 
