@@ -1,5 +1,3 @@
-select * crashes on ?
-
 payloads
 - payload fetch - look at startat and maxr in the payload and load all the outstanding pages.
 

@@ -1,5 +1,5 @@
 ---------------------------------------
-payload (bucket [bucket id])
+payload (bucket [bucket id]|(save|load) [filename])
 ---------------------------------------
 Payloads are obtained from conducting searches. They are the JSON obtained from the remote Jira instance and are cached by JIBR and used for commands like 'look' and 'bucket'. This command allows a human inspection of the search results JSON.
 
@@ -10,3 +10,9 @@ Usage ...
 
   > payload bucket [bucket id]
   Displays the issues in the payload with keys corresponding to the keys in the identified bucket.
+
+  > payload save [filename]
+  Save the current payload into the given file.
+
+  > payload load [filename]
+  Replace the current payload with the contents of the given file.
