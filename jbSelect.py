@@ -17,7 +17,7 @@ def columns():
 def appendToUrl( url ):
     # select * does nothing to the URL
     if cols == "*":
-        return
+        return url
 
     # otherwise, append something ...
     url = url + "&fields="
