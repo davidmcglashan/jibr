@@ -13,10 +13,10 @@ jsonCb = None
 maxResults = 50
 startAt = 0
 
-# =======================================
-# Perform a REST API get
-# =======================================
-def searchf( ins ):
+# ==============================================================================================
+#  Perform a REST API get. Starting and maxRecords override startAt and maxResults if provided.
+# ==============================================================================================
+def searchf( ins, append=False, starting=None, maxRecords=None ):
     global previousIns
 
     # No params means nothing to do
@@ -28,7 +28,10 @@ def searchf( ins ):
     url = "/rest/api/2/search?jql=%s" % jbParse.parse(ins)
 
     # Always do maxresults and startat even if they're the system defaults.
-    url = url + "&maxResults=%s&startAt=%s" % ( maxResults, startAt )
+    url = url + "&maxResults=%s&startAt=%s" % ( 
+        maxResults if maxRecords == None else maxRecords, 
+        startAt if starting == None else starting 
+        )
 
     # Include fields to restrict the columns being selected.
     url = jbSelect.appendToUrl( url )
@@ -46,7 +49,7 @@ def searchf( ins ):
         if data is None:
             jbEcho.echo( "No data" )
         else:
-            jbPayload.setf( json.loads(data.decode("utf-8")) )
+            jbPayload.setf( json.loads(data.decode("utf-8")), appendAt=starting )
 
             # If there's a JSON callback, then call it.
             if jsonCb != None:
@@ -68,7 +71,7 @@ def startAtf( ins ):
     global startAt
 
     if len(ins) == 1: 
-        startAt = ins[0]
+        startAt = int(ins[0])
 
     jbEcho.echo( "Results will start at %s" % startAt )
 
@@ -79,7 +82,7 @@ def maxResultsf( ins ):
     global maxResults
 
     if len(ins) == 1: 
-        maxResults = ins[0]
+        maxResults = int(ins[0])
 
     jbEcho.echo( "Max results returned will be %s" % maxResults )
 

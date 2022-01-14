@@ -2,7 +2,7 @@
     "expand": "schema,names",
     "startAt": 0,
     "maxResults": 2,
-    "total": 24,
+    "total": 2,
     "issues": [
         {
             "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",

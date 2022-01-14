@@ -3,15 +3,27 @@ import json
 from . import jbBucket
 from . import jbEcho
 from . import jbFields
+from . import jbSearch
 
 payload = None
 
 # =======================================
 # Show the full payload
 # =======================================
-def setf( pl ):
+def setf( pl, appendAt=None ):
     global payload
-    payload = pl
+
+    # Not appending means a straight swapsie!
+    if appendAt == None:
+        payload = pl
+        return
+
+    # Payloads means copying the pl[issues] into payloads[issues]
+    payload['issues'] = payload['issues'] + pl['issues']
+
+    # And tidy up the other metadata ...
+#    payload['maxResults'] = 0
+#    payload['startAt'] = 0
 
 # =======================================
 # Parse the payload command
@@ -32,6 +44,10 @@ def payloadf( ins ):
     # Save the payload into a file
     elif len(ins) == 2 and ins[0] == 'save':
         savef( ins );
+
+    # Save the payload into a file
+    elif len(ins) == 1 and ins[0] == 'complete':
+        completef( ins );
 
 # =======================================
 # Show the full payload
@@ -103,3 +119,47 @@ def savef( ins ):
         jbEcho.echo( "Payload saved into %s" % filename )
     except( FileNotFoundError ):
         jbEcho.echo( "File not found: " + filename )
+
+# ======================================================================================
+#  Completes the payload by launching subsequent searches using maxresults and startsat
+#  until all the query's possible results have been loaded into the payload.
+# ======================================================================================
+def completef( ins ):
+    # Nothing to do with no payload.
+    if payload == None:
+        jbEcho.echo( "There is no payload. Try doing a search!" )
+        return
+
+    # The payload might not start at zero! Let's load from 0 to payload.startsat first.
+    if payload['startAt'] > 0:
+        cstart = 0
+        cend = payload['startAt']-1
+        cpage = jbSearch.maxResults
+        completeRange( cstart, cend, cpage )
+
+    # Now we load from where the payload ends to the total results
+    cstart = payload['startAt'] + payload['maxResults']
+    cend = payload['total']
+    cpage = jbSearch.maxResults
+    completeRange( cstart, cend, cpage )
+
+# ======================================================================================
+#  Completes the payload by operating within a range of numbered items.
+# ======================================================================================
+def completeRange( start, end, page ):
+    while True:
+        if start + page >= end:
+            conductQuery( start, 1+end-start )
+            return
+
+        conductQuery( start, page )
+        start = start + page
+
+# ======================================================================================
+#  Talks to jbSearch to complete the payload using Jira queries
+# ======================================================================================
+def conductQuery( startAt, maxResults ):
+    print( "loading from %s to %s" % ( startAt, startAt+maxResults ) )
+
+    # Remember the current state. This shouldn't be a destructive operation.
+    jbSearch.searchf( list(), starting=startAt, maxRecords=maxResults, append=True )
