@@ -49,7 +49,8 @@ def searchf( ins, append=False, starting=None, maxRecords=None ):
         if data is None:
             jbEcho.echo( "No data" )
         else:
-            jbPayload.setf( json.loads(data.decode("utf-8")), appendAt=starting )
+            newPl = json.loads(data.decode("utf-8"));
+            jbPayload.setf( newPl, appendAt=starting )
 
             # If there's a JSON callback, then call it.
             if jsonCb != None:
@@ -59,8 +60,8 @@ def searchf( ins, append=False, starting=None, maxRecords=None ):
                 jbPayload.displayf()
 
             if jbEcho.level > 0:
-                if "issues" in jbPayload.payload:
-                    jbEcho.echo( "%s records retrieved (out of %s)" % (len(jbPayload.payload["issues"]),jbPayload.payload["total"]) )
+                if "issues" in newPl:
+                    jbEcho.echo( "%s records retrieved (out of %s)" % (len(newPl["issues"]),newPl["total"]) )
                 else:
                     jbEcho.echo( "1 record retrieved" )
 

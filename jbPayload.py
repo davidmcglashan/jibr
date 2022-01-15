@@ -19,11 +19,10 @@ def setf( pl, appendAt=None ):
         return
 
     # Payloads means copying the pl[issues] into payloads[issues]
-    payload['issues'] = payload['issues'] + pl['issues']
-
-    # And tidy up the other metadata ...
-#    payload['maxResults'] = 0
-#    payload['startAt'] = 0
+    i = appendAt
+    for issue in pl['issues']:
+        payload['issues'][i] = issue
+        i = i + 1
 
 # =======================================
 # Parse the payload command
@@ -132,6 +131,24 @@ def completef( ins ):
 
     # The payload might not start at zero! Let's load from 0 to payload.startsat first.
     if payload['startAt'] > 0:
+        # To preserve ordering we should move the current payload issues from index 0
+        # to index startAt so that the newly loaded records slot into the correct list positions.
+        rsta = payload['startAt']
+        rend = payload['startAt'] + payload['maxResults'] - 1
+        i = 0
+        j = 0
+        tempIssues = list()
+
+        while i < payload['total']:
+            if i >= rsta and i <= rend:
+                tempIssues.append( payload['issues'][j] )
+                j = j + 1
+            else:
+                tempIssues.append( None )
+            i = i + 1
+
+        payload['issues'] = tempIssues
+
         cstart = 0
         cend = payload['startAt']-1
         cpage = jbSearch.maxResults
@@ -142,6 +159,10 @@ def completef( ins ):
     cend = payload['total']
     cpage = jbSearch.maxResults
     completeRange( cstart, cend, cpage )
+        
+    # And tidy up the other metadata ...
+    payload['maxResults'] = payload['total']
+    payload['startAt'] = 0
 
 # ======================================================================================
 #  Completes the payload by operating within a range of numbered items.
