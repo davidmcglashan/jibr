@@ -1,9 +1,20 @@
-payloads
-- payload fetch - look at startat and maxr in the payload and load all the outstanding pages.
+record
+- record [key] take an item from the payload and ecapsulate it in a dictionary, then ...
+- record [field] new value! (only copy the fields that have changed so we can track edits)
+- record update
+  - might need ids to be preserved 
+- record comments
+- record comment [text]
+
+scripts with params
+- script foo bar pip
+- runs script foo with params bar and pip in {1} and {2}
+- need precheck that {1} and {2} exist
+- use variables!
 
 vars
 - using in open
-- using in bucket match 'bucket match <var> <bid>'
+- using in bucket match 'bucket match <var> <bucket id>'
 - find other places to use
 
 buckets
@@ -25,6 +36,7 @@ count
 - order by field asc/desc
 
 payloads
+- payload [key] - show just the payload for that record
 - append with ?
 - jira payload - open the payload's keys in a search: key in ()
 
