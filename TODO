@@ -1,5 +1,5 @@
 record
-- record [key] take an item from the payload and ecapsulate it in a dictionary, then ...
+- record [key|id] take an item from the payload and ecapsulate it in a dictionary, then ...
 - record [field] new value! (only copy the fields that have changed so we can track edits)
 - record update
   - might need ids to be preserved 

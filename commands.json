@@ -33,8 +33,9 @@
     },
 
     {
-        "name": "Fields and columns",
+        "name": "Records, fields and columns",
         "commands": {
+            "record":   "jbRecord.recordf",
             "fields":   "jbFields.getf"
         }
     },
