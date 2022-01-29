@@ -1,13 +1,15 @@
 import json
 
 from . import jbEcho
+from . import jbHost
+from . import jbHttpConn
 from . import jbPayload
 
 record = None
 values = None
 
 # =======================================
-# Handle a response
+#  Parse the record command
 # =======================================
 def recordf( ins ):
     global record
@@ -19,9 +21,25 @@ def recordf( ins ):
 
     # Exactly one parameter means we go huntin' in the payload for that record
     if len(ins) == 1:
-        for r in jbPayload.payload['issues']:
-            if r['id'] == ins[0] or r['key'].casefold() == ins[0].casefold():
-                record = r
-                values = dict()
-                jbEcho.echo( "Record now points to %s" % record['key'] )
-                break
+        loadRecordf( ins[0].upper() )
+
+# =======================================
+#  Load a record from the remote Jira
+# =======================================
+def loadRecordf( recid ):
+    global record
+
+    values = dict()
+
+    url = "/rest/api/2/issue/%s" % recid
+
+    # Make the HTTP request and get back a response
+    headers = dict()
+    jbHost.addAuthHeader( headers )
+    data = jbHttpConn.connectTo( jbHost.host(), "GET", url, headers=headers )
+    if data is None:
+        jbEcho.echo( "No data" )
+    else:
+        record = json.loads(data.decode("utf-8"));
+        jbEcho.echo( "Record now points to %s" % record['key'] )
+        jbEcho.echo( json.dumps( record, indent=4, sort_keys=True ), 3 )

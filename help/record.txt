@@ -1,0 +1,15 @@
+------------------------------------------------------------
+record (id|key)
+------------------------------------------------------------
+Record creates a pointer to a single issue in the payload that can be used to modify the record. Edits are stored locally and then pushed to the remote Jira with 'record update'
+
+Usage ...
+---------
+  > record
+  Displays the record. This will be in the same JSON format as the payload. 
+
+  > record [id|key]
+  Create a new record. The pointed-at issue must be in the payload. You can use its id or key field.
+
+  > record update
+  Updates the record by POSTing its modified fields back to the remote Jira. 

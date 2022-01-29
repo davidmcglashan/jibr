@@ -1,9 +1,8 @@
-import http.client
 import json
 
 from . import jbEcho
 from . import jbHost
-from . import jbResponse
+from . import jbHttpConn
 from . import jbSelect
 from . import jbParse
 from . import jbPayload
@@ -24,7 +23,6 @@ def searchf( ins, append=False, starting=None, maxRecords=None ):
         ins = previousIns
     previousIns = ins
 
-    conn = http.client.HTTPSConnection( jbHost.host() )
     url = "/rest/api/2/search?jql=%s" % jbParse.parse(ins)
 
     # Always do maxresults and startat even if they're the system defaults.
@@ -37,33 +35,29 @@ def searchf( ins, append=False, starting=None, maxRecords=None ):
     url = jbSelect.appendToUrl( url )
     jbEcho.echo( url, 2 )
 
-    # Make the HTTP request and get back a response
+    # Make the HTTP request and get back some data?
     headers = dict()
     jbHost.addAuthHeader( headers )
-    conn.request( "GET", url, headers=headers)
-    response = conn.getresponse()
+    data = jbHttpConn.connectTo( jbHost.host(), "GET", url, headers=headers)
 
-    # Is the response a good one? If so, dump the JSON.
-    if jbResponse.handleResponse( response ):
-        data = response.read()
-        if data is None:
-            jbEcho.echo( "No data" )
-        else:
-            newPl = json.loads(data.decode("utf-8"));
-            jbPayload.setf( newPl, appendAt=starting )
+    if data is None:
+        jbEcho.echo( "No data" )
+    else:
+        newPl = json.loads(data.decode("utf-8"));
+        jbPayload.setf( newPl, appendAt=starting )
 
-            # If there's a JSON callback, then call it.
-            if jsonCb != None:
-                jsonCb( url, jbPayload.payload )
+        # If there's a JSON callback, then call it.
+        if jsonCb != None:
+            jsonCb( url, jbPayload.payload )
 
-            if jbEcho.level == 3:
-                jbPayload.displayf()
+        if jbEcho.level == 3:
+            jbPayload.displayf()
 
-            if jbEcho.level > 0:
-                if "issues" in newPl:
-                    jbEcho.echo( "%s records retrieved (out of %s)" % (len(newPl["issues"]),newPl["total"]) )
-                else:
-                    jbEcho.echo( "1 record retrieved" )
+        if jbEcho.level > 0:
+            if "issues" in newPl:
+                jbEcho.echo( "%s records retrieved (out of %s)" % (len(newPl["issues"]),newPl["total"]) )
+            else:
+                jbEcho.echo( "1 record retrieved" )
 
 # =======================================
 # Print or set the start at number

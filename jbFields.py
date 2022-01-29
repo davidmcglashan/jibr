@@ -1,9 +1,8 @@
-import http.client
 import json
 
 from . import jbEcho
 from . import jbHost
-from . import jbResponse
+from . import jbHttpConn
 
 fields = None
 callback = None
@@ -26,52 +25,46 @@ def getf( ins ):
         return
 
     if len(ins) == 1 and ins[0] == 'get':
-        conn = http.client.HTTPSConnection( jbHost.host() )
         url = "/rest/api/2/field"
         jbEcho.echo( url )
 
         # Make the HTTP request and get back a response
         headers = dict()
         jbHost.addAuthHeader( headers )
-        conn.request( "GET", url, headers=headers)
-        response = conn.getresponse()
+        data = jbHttpConn.connectTo( jbHost.host(), "GET", url, headers=headers )
 
-        # Is the response a good one? If so, dump the JSON.
-        if jbResponse.handleResponse( response ):
-            data = response.read()
-
-            # No data? Never mind ...
-            if data is None:
-                jbEcho.echo( "Nope data" )
+        # No data? Never mind ...
+        if data is None:
+            jbEcho.echo( "Nope data" )
             
-            else:
-                fs = json.loads( data.decode("utf-8") )
+        else:
+            fs = json.loads( data.decode("utf-8") )
 
-                # Set the storage up.
-                fields = dict()
-                idToPretty = dict()
-                easyToType = dict()
-                fields["idToPretty"] = idToPretty
-                fields["easyToType"] = easyToType
+            # Set the storage up.
+            fields = dict()
+            idToPretty = dict()
+            easyToType = dict()
+            fields["idToPretty"] = idToPretty
+            fields["easyToType"] = easyToType
 
-                for field in fs:
-                    # Ignored fields are ignored ...
-                    if field["id"] in ignored:
-                        continue
+            for field in fs:
+                # Ignored fields are ignored ...
+                if field["id"] in ignored:
+                    continue
 
-                    # Map the field IDs to their pretty names.
-                    idToPretty[field["id"]] = field["name"]
+                # Map the field IDs to their pretty names.
+                idToPretty[field["id"]] = field["name"]
 
-                    # Map the easy to type names to the IDs
-                    easyToType[ easify( field["name"] ) ] = field["id"]
+                # Map the easy to type names to the IDs
+                easyToType[ easify( field["name"] ) ] = field["id"]
 
-        # Display the findings where appropriate.
-        jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ), 3 )
-        jbEcho.echo( "%s fields loaded" % len(idToPretty) )
+    # Display the findings where appropriate.
+    jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ), 3 )
+    jbEcho.echo( "%s fields loaded" % len(idToPretty) )
 
-        # Hit up the fields callback.
-        if callback != None:
-            callback( fields )
+    # Hit up the fields callback.
+    if callback != None:
+        callback( fields )
 
 # =======================================================================================
 # Converts the pretty name of a field into something easy to type.
