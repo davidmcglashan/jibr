@@ -1,0 +1,15 @@
+---------------------------------------
+field
+---------------------------------------
+Sets and displays values for fields against the current record. Use this command to modify issues on the remote Jira. Fields cannot be set until a record is established with the record command. Loading a new record or updating the existing one will remove any new values which have been set.
+
+Usage ...
+---------
+  > field
+  Displays any field values which have been set.
+
+  > field [name]
+  Displays the new value of the named field.
+
+  > field [name] [value ...]
+  Sets a new value for the named field.

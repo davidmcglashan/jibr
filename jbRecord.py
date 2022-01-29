@@ -6,7 +6,6 @@ from . import jbHttpConn
 from . import jbPayload
 
 record = None
-values = None
 
 # =======================================
 #  Parse the record command
@@ -19,17 +18,18 @@ def recordf( ins ):
         jbEcho.echo( json.dumps( record, indent=4, sort_keys=True ) )
         return
 
-    # Exactly one parameter means we go huntin' in the payload for that record
+    # Exactly one parameter means fly or die!
     if len(ins) == 1:
-        loadRecordf( ins[0].upper() )
+        if ins[0] == 'clear':
+            record = None
+        else:
+            loadRecordf( ins[0].upper() )
 
 # =======================================
 #  Load a record from the remote Jira
 # =======================================
 def loadRecordf( recid ):
     global record
-
-    values = dict()
 
     url = "/rest/api/2/issue/%s" % recid
 
