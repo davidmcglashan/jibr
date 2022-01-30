@@ -11,5 +11,8 @@ Usage ...
   > record [id|key]
   Create a new record. The pointed-at issue must be in the payload. You can use its id or key field.
 
+  > record clear
+  Forget about the current record.
+
   > record update
   Updates the record by POSTing its modified fields back to the remote Jira. 

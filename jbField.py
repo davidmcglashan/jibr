@@ -30,3 +30,10 @@ def fieldf( ins ):
     if len(ins) > 1:
         fields[ins[0]] = ' '.join(ins[1:])
         jbEcho.echo( "%s: %s" % (ins[0],fields[ins[0]]) )
+
+# ============================================
+#  Clear the data from any preserved fields.
+# ============================================
+def clear():
+    global fields
+    fields = dict()

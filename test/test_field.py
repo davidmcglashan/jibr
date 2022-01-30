@@ -25,5 +25,18 @@ class TestField( unittest.TestCase ):
         jbFunc.parse( "field" )
         self.assertEqual( jbEcho.lastEcho, "title: setting title in a test" )
 
+    # ========================================================================================
+    def test_record_clear_also_clears_fields( self ):
+        jbHttpConn.testmode()
+        jbFunc.parse( "record clear" )
+        jbFunc.parse( "record ABC-25" )
+        jbFunc.parse( "field title setting title in a test" )
+        self.assertEqual( jbField.fields['title'], "setting title in a test" )
+        jbFunc.parse( "field assignee john.smith" )
+        self.assertEqual( jbField.fields['assignee'], "john.smith" )
+        self.assertEqual( len(jbField.fields), 2 )
+
+        jbFunc.parse( "record clear" )
+        self.assertEqual( len(jbField.fields), 0 )
 if __name__ == '__main__':
     unittest.main()

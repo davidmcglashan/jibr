@@ -1,6 +1,7 @@
 import json
 
 from . import jbEcho
+from . import jbField
 from . import jbHost
 from . import jbHttpConn
 from . import jbPayload
@@ -20,8 +21,16 @@ def recordf( ins ):
 
     # Exactly one parameter means fly or die!
     if len(ins) == 1:
+        # Forget about the current record
         if ins[0] == 'clear':
             record = None
+            jbField.clear()
+
+        # Save the current back to the remote Jira with an HTTP POST
+        elif ins[0] == 'update':
+            updatef()
+
+        # Assume parameter 0 is a Jira key and load it as a record
         else:
             loadRecordf( ins[0].upper() )
 
