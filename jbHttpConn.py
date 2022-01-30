@@ -15,16 +15,16 @@ def testmode( enabled=True ):
 # ============================
 #  Connect to a remote host
 # ============================
-def connectTo( host, method, url, headers=None ):
-    return connectTof( host, method, url, headers )
+def connectTo( host, method, url, headers=None, body=None ):
+    return connectTof( host, method, url, headers, body )
 
 # ===========================================
 #  Connect to a remote Jira host using HTTPS
 # ===========================================
-def connectToJira( host, method, url, headers=None ):
+def connectToJira( host, method, url, headers=None, body=None ):
     # Talk to the remote Jira. Get a response
     connection = http.client.HTTPSConnection( host )
-    connection.request( method, url, headers=headers )
+    connection.request( method, url, headers=headers, body=body )
     response = connection.getresponse()
 
     # Validate the response
@@ -35,7 +35,7 @@ def connectToJira( host, method, url, headers=None ):
 # ================================================================================================
 #  Load content from a file while pretending to be connecting to a remote Jira (used for testing)
 # ================================================================================================
-def connectToFile( host, method, url, headers=None ):
+def connectToFile( host, method, url, headers=None, body=None ):
     # Files work on the assumption that the last bit of the URL is the filename
     filename = url.rsplit('/', 1)[-1]
     if '.' not in filename:

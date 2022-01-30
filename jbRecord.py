@@ -52,3 +52,15 @@ def loadRecordf( recid ):
         record = json.loads(data.decode("utf-8"));
         jbEcho.echo( "Record now points to %s" % record['key'] )
         jbEcho.echo( json.dumps( record, indent=4, sort_keys=True ), 3 )
+
+
+# =============================================================
+#  Save the current back to the remote Jira with an HTTP POST
+# =============================================================
+def updatef():
+    if record == None:
+        jbEcho.echo( "No record. Point to one before setting fields." )
+        return
+
+    # Updating is actually handled by the field command, since it's fields that get written
+    jbField.update( record['key'] )
