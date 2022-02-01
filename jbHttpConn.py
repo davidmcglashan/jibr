@@ -1,4 +1,5 @@
 import http.client
+import json
 
 from . import jbEcho
 
@@ -31,6 +32,11 @@ def connectToJira( host, method, url, headers=None, body=None ):
     if handleResponse( response ):
         return response.read()
     return None
+
+# =========================================================================================
+# Can't declate this at the top. It's the pointer to function we will call in connectTo()
+# =========================================================================================
+connectTof = connectToJira
 
 # ================================================================================================
 #  Load content from a file while pretending to be connecting to a remote Jira (used for testing)
@@ -80,11 +86,11 @@ def handleResponse( response ):
         jbEcho.echo( s )
 
     # The response might contain something useful we can use as an error message.
-    jbEcho.echo( response.getheaders() )
+    jbEcho.echo( json.dumps( response.getheaders(), indent=4, sort_keys=True ), 3 )
     data = response.read()
-    if data is not None and jbEcho.level > 1:
-        jbEcho.echo( data.decode("utf-8") )
+    if data is not None:
+        errormsg = json.loads( data.decode("utf-8") )
+        jbEcho.echo( json.dumps( errormsg, indent=4, sort_keys=True ), 2 )
 
     return False
 
-connectTof = connectToJira

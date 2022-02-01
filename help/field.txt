@@ -13,3 +13,9 @@ Usage ...
 
   > field [name] [value ...]
   Sets a new value for the named field.
+
+  > field - [name]
+  Removes the [name]d field from the new values.
+
+  > field --
+  Removes all the named fields.

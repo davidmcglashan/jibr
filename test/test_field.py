@@ -38,5 +38,34 @@ class TestField( unittest.TestCase ):
 
         jbFunc.parse( "record clear" )
         self.assertEqual( len(jbField.fields), 0 )
+
+    # ========================================================================================
+    def test_minus_removes_a_field( self ):
+        jbHttpConn.testmode()
+        jbFunc.parse( "record clear" )
+        jbFunc.parse( "record ABC-25" )
+        jbFunc.parse( "field abc the first field" )
+        jbFunc.parse( "field def the second field" )
+        jbFunc.parse( "field ghi the third field" )
+        self.assertEqual( len(jbField.fields), 3 )
+
+        jbFunc.parse( "field - def" )
+        self.assertEqual( len(jbField.fields), 2 )
+        self.assertEqual( jbEcho.lastEcho, "def removed" )
+
+    # ========================================================================================
+    def test_minus_minus_removes_all_fields( self ):
+        jbHttpConn.testmode()
+        jbFunc.parse( "record clear" )
+        jbFunc.parse( "record ABC-25" )
+        jbFunc.parse( "field abc the first field" )
+        jbFunc.parse( "field def the second field" )
+        jbFunc.parse( "field ghi the third field" )
+        self.assertEqual( len(jbField.fields), 3 )
+
+        jbFunc.parse( "field --" )
+        self.assertEqual( len(jbField.fields), 0 )
+        self.assertEqual( jbEcho.lastEcho, "3 field(s) removed" )
+
 if __name__ == '__main__':
     unittest.main()

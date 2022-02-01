@@ -6,20 +6,27 @@ from . import jbHttpConn
 
 fields = None
 callback = None
+types = None
 
 # ignoring issuekey prevents a collision in the name space and allows 'key' to work as a field.
 ignored = { 'issuekey' }
+
+# track the fields using name or id
+usesId = set()
+usesName = set()
 
 # ===============================================
 # Perform a REST API get on the fields endpoint.
 # ===============================================
 def getf( ins ):
     global fields
+    global types
 
     # No params means display the current fields maps.
     if len(ins) == 0:
         if fields != None:
             jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ) )
+            jbEcho.echo( json.dumps( types, indent=4, sort_keys=True ) )
         else:
             jbEcho.echo( "Fields have not been loaded yet.")
         return
@@ -39,11 +46,13 @@ def getf( ins ):
             
         else:
             fs = json.loads( data.decode("utf-8") )
+            jbEcho.echo( json.dumps( fs, indent=4, sort_keys=True ), 3 )
 
             # Set the storage up.
             fields = dict()
             idToPretty = dict()
             easyToType = dict()
+            types = dict()
             fields["idToPretty"] = idToPretty
             fields["easyToType"] = easyToType
 
@@ -58,8 +67,13 @@ def getf( ins ):
                 # Map the easy to type names to the IDs
                 easyToType[ easify( field["name"] ) ] = field["id"]
 
+                # Record the type of the field
+                if "schema" in field:
+                    types[field["id"]] = field["schema"]["type"]
+
     # Display the findings where appropriate.
     jbEcho.echo( json.dumps( fields, indent=4, sort_keys=True ), 3 )
+    jbEcho.echo( json.dumps( types, indent=4, sort_keys=True ), 3 )
     jbEcho.echo( "%s fields loaded" % len(idToPretty) )
 
     # Hit up the fields callback.
@@ -99,3 +113,23 @@ def findIdByEasy( str ):
 def fieldsCallback( cb ):
     global callback
     callback = cb
+
+# =============================================================================
+#  Consider the type of a field and encapsulate its value for an HTTP request
+# =============================================================================
+def typeify( field, value ):
+    # Don't know about this field? Not our problem!
+    if field not in types:
+        return value
+
+    typ = types[field]
+
+    # Users are in a little dictionary with a 'name' key.
+    if typ == 'user':
+        ret = dict()
+        ret['name'] = value
+        return ret
+
+    # default implementation just returns the value.
+    else:
+        return value

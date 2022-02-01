@@ -1,6 +1,6 @@
 record
-- record update
-  - might need ids to be preserved 
+- record update for "complex" fields
+  - statuses (handle violation of workflow)
 
 comments
 - record comments
