@@ -1,16 +1,24 @@
-record
-- record update for "complex" fields
-  - statuses (handle violation of workflow)
-
-comments
-- record comments
-- record comment [text]
+buckets
+- bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
+- 'bucket payload' puts all the payload keys in bucket 0
+- 'bucket payload name' puts all the payload keys in the named bucket
 
 scripts with params
 - script foo bar pip
 - runs script foo with params bar and pip in {1} and {2}
 - need precheck that {1} and {2} exist
 - use variables!
+
+record
+- record update for "complex" fields
+  - statuses (handle violation of workflow)
+
+table or tlook
+- version of look that outputs to a table, not JSON
+
+comments
+- record comments
+- record comment [text]
 
 vars
 - using in open
@@ -27,7 +35,6 @@ issue
 buckets
 - improvements to match
 - bucket by 'field field field'
-- bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
 
 count
 - having > 50
