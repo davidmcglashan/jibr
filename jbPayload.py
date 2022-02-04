@@ -21,7 +21,10 @@ def setf( pl, appendAt=None ):
     # Payloads means copying the pl[issues] into payloads[issues]
     i = appendAt
     for issue in pl['issues']:
-        payload['issues'][i] = issue
+        if i > len(payload):
+            payload['issues'].append( issue )
+        else:
+            payload['issues'][i] = issue
         i = i + 1
 
 # =======================================
