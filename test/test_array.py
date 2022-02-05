@@ -49,6 +49,32 @@ class TestArray( unittest.TestCase ):
         jbFunc.parse( "array clear all" )
         self.assertEqual( len(jbArray.arrays), 0 )
 
+    # ======================================================================
+    # Display an array
+    def test_array_display( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array one key" )
+
+        jbFunc.parse( "array one" )
+        self.assertEqual( jbEcho.lastEcho, "one: ['ABC-25', 'ABC-24']" )
+
+    # ======================================================================
+    # Display all arrays
+    def test_array_display_all( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array two key" )
+        jbFunc.parse( "array one key" )
+        jbFunc.parse( "array zed key" )
+        jbFunc.parse( "array abc key" )
+        
+        # A soft test, but if we get this far we know it's not broken!
+        jbFunc.parse( "array" )
+        self.assertTrue( jbEcho.lastEcho.endswith( ": ['ABC-25', 'ABC-24']" ) )
+
 # ======================================================================
 if __name__ == '__main__':
     unittest.main()
