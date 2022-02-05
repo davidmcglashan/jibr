@@ -33,5 +33,6 @@ class TestHost( unittest.TestCase ):
         jbFunc.parse( "host" )
         self.assertEqual( jbEcho.lastEcho, "example.com:8443" )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

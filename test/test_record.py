@@ -23,5 +23,6 @@ class TestRecord( unittest.TestCase ):
         jbFunc.parse( "record clear" )
         self.assertTrue( jbRecord.record == None )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

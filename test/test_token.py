@@ -33,5 +33,6 @@ class TestToken( unittest.TestCase ):
         self.assertTrue( 'Authorization' in header )
         self.assertEqual( header['Authorization'], 'Bearer daviddaviddaviddavid' )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

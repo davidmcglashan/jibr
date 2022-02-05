@@ -1,7 +1,12 @@
 buckets
 - bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
-- 'bucket payload' puts all the payload keys in bucket 0
-- 'bucket payload name' puts all the payload keys in the named bucket
+
+arrays and vars
+- setting from payload via field
+- setting from buckets: bucket array [arr] [id] puts keys in array
+- setting from bucket names: bucket array [arr] names: makes an array of numbered bucket names (which are values from other queries)
+- array <arr> - <arr>
+- array <arr> + <arr>
 
 scripts with params
 - script foo bar pip
@@ -46,10 +51,6 @@ payloads
 - payload [key] - show just the payload for that record
 - append with ?
 - jira payload - open the payload's keys in a search: key in ()
-
-arrays and vars
-- setting from payload
-- viewing
 
 keys command to pull keys out of payloads
 - why?

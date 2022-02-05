@@ -12,17 +12,17 @@
             "fields": {
                 "summary": "Example story for ABC",
                 "creator": {
-                    "self": "https://localhost:8080/rest/api/2/user?username=john.doe",
-                    "name": "john.doe",
-                    "key": "john.doe",
-                    "emailAddress": "john.doe@example.com",
+                    "self": "https://localhost:8080/rest/api/2/user?username=kevin.smith",
+                    "name": "kevin.smith",
+                    "key": "kevin.smith",
+                    "emailAddress": "kevin.smith@example.com",
                     "avatarUrls": {
-                        "48x48": "https://localhost:8080/secure/useravatar?ownerId=john.doe&avatarId=11612",
-                        "24x24": "https://localhost:8080/secure/useravatar?size=small&ownerId=john.doe&avatarId=11612",
-                        "16x16": "https://localhost:8080/secure/useravatar?size=xsmall&ownerId=john.doe&avatarId=11612",
-                        "32x32": "https://localhost:8080/secure/useravatar?size=medium&ownerId=john.doe&avatarId=11612"
+                        "48x48": "https://localhost:8080/secure/useravatar?ownerId=kevin.smith&avatarId=11612",
+                        "24x24": "https://localhost:8080/secure/useravatar?size=small&ownerId=kevin.smith&avatarId=11612",
+                        "16x16": "https://localhost:8080/secure/useravatar?size=xsmall&ownerId=kevin.smith&avatarId=11612",
+                        "32x32": "https://localhost:8080/secure/useravatar?size=medium&ownerId=kevin.smith&avatarId=11612"
                     },
-                    "displayName": "John Doe",
+                    "displayName": "Kevin Smith",
                     "active": true,
                     "timeZone": "Europe/London"
                 },

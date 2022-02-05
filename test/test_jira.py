@@ -16,5 +16,6 @@ class TestJira( unittest.TestCase ):
         jbFunc.parse( "jira abc-1" )
         self.assertEqual( jbWeb.lastUrl, "https://localhost:80/browse/abc-1" )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

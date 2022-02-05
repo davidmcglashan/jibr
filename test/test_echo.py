@@ -75,5 +75,6 @@ class TestEcho( unittest.TestCase ):
         self.assertEqual( jbEcho.level, 2 )
         self.assertEqual( jbEcho.lastEcho, "Echo level is 2" )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

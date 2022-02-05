@@ -67,5 +67,6 @@ class TestField( unittest.TestCase ):
         self.assertEqual( len(jbField.fields), 0 )
         self.assertEqual( jbEcho.lastEcho, "3 field(s) removed" )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()

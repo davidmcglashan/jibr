@@ -14,5 +14,6 @@ class TestPayload( unittest.TestCase ):
         self.assertTrue( jbPayload.payload != None )
         self.assertEqual( len( jbPayload.payload['issues'] ), 2 )
 
+# ======================================================================
 if __name__ == '__main__':
     unittest.main()
