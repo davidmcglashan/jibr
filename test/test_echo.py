@@ -75,6 +75,17 @@ class TestEcho( unittest.TestCase ):
         self.assertEqual( jbEcho.level, 2 )
         self.assertEqual( jbEcho.lastEcho, "Echo level is 2" )
 
+    # ======================================================================
+    # Test that echo david is ignored
+    def test_echo_quietly( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "maxresults 10" )
+        jbFunc.parse( "echo 0" )
+        jbFunc.parse( "maxresults 100" )
+        jbFunc.parse( "echo 1 quiet" )
+        self.assertEqual( jbEcho.level, 1 )
+        self.assertEqual( jbEcho.lastEcho, "Max results returned will be 10" )
+
 # ======================================================================
 if __name__ == '__main__':
     unittest.main()

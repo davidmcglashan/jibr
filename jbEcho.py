@@ -21,8 +21,10 @@ def mute( string ):
 # ==========================================================
 def testmode( enabled=True ):
     global output
+    global level
     if enabled:
         output = mute
+        level = 2
     else:
         output = print
 
@@ -31,6 +33,12 @@ def testmode( enabled=True ):
 # ===================================
 def echof( ins ):
     global level
+    quiet = False
+
+    # Is there a 'quiet' at the end of the params?
+    if ins[-1] == 'quiet':
+        quiet = True
+        ins = ins[:-1]
 
     if len(ins) == 1 and (ins[0] == "off" or ins[0] == '1'):
         level = 1
@@ -44,7 +52,8 @@ def echof( ins ):
         writef( ins[1:] )
         return
 
-    echo( "Echo level is %s" % level )
+    if not quiet:
+        echo( "Echo level is %s" % level )
 
 # =================================================================================
 # Echo some text if the current level exceeds or equals the optional displayLevel.

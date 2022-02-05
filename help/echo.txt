@@ -1,5 +1,5 @@
 -------------------------------------------
-echo ( on|off|[level]]|file stop|append|([filename]) )
+echo ( on|off|[level]]|file stop|append|([filename]) ) (quiet)
 -------------------------------------------
 Changes the output threshold for text being written to the console. Output can be suppressed or changed to provide different levels of detail.
 
@@ -11,6 +11,8 @@ There are four levels ...
 
 Echo output can be sent to a file instead of the console. The chosen file can be overwritten or appended to using the append flag in the command.
 
+Including the flag 'quiet' at the end of the command prevents the change of echo level being reported.
+
 Usage ...
 ---------
   > echo
@@ -21,6 +23,9 @@ Usage ...
 
   > echo on
   Sets the current level to 2
+
+  > echo on quiet
+  Sets the current level to 2 but does so without writing to the console.
 
   > echo off
   Sets the current level to 1
