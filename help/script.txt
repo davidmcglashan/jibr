@@ -1,12 +1,25 @@
 ---------------------------------------
-script [file]
+script [file] ([params ...])
 ---------------------------------------
-Open a text file and treat its line as instructions, executing them one after the other.
+Open a text file and treat its line as instructions, executing them one after the other. Files are loaded from the current path. You can use / to change folders. The executed file should have a .jibr extension but you don't need to use this with the script command.
+
+Parameters can be passed into the file. These must be declared in the first line of the script like so ...
+
+  params abc def ghi
+
+and the referenced in the commands that follow ...
+
+  ? project = {abc}
+
+Declared parameters must be used at the command line and they must be present in the script.
 
 Usage ...
 ---------
   > script [file]
   Executes the instructions in [file]
+
+  > script foo bar
+  Executes the instructions in foo.jibr, passing in 'bar' as a parameter for use in the file.
 
 Alias ...
 ---------

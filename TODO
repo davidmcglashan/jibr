@@ -1,11 +1,10 @@
+allow echo to change without echoing (suppress)
+
 arrays and vars
 - setting from buckets: bucket array [arr] [id] puts keys in array
 - setting from bucket names: bucket array [arr] names: makes an array of numbered bucket names (which are values from other queries)
 
 scripts with params
-- script foo bar pip
-- runs script foo with params bar and pip in {1} and {2}
-- need precheck that {1} and {2} exist
 - use variables or arrays 
 
 for loops, e.g.
