@@ -16,7 +16,7 @@ def arrayf(ins):
 
     # One param is a key, so print the value.
     elif len(ins) == 1 and ins[0] in arrays:
-        displayf( arrays[ins[0]] )
+        displayf( ins[0] )
     elif len(ins) == 1 and not ins[0] in arrays:
         jbEcho.echo( "No array with that name: %s" % ins[0] )
 
@@ -39,7 +39,7 @@ def displayf( key ):
 # ========================================
 def clearf( ins ):
     global arrays
-    
+
     # Clear all!
     if ins[1] == 'all':
         arrays = {}
