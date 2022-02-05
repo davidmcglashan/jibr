@@ -139,6 +139,22 @@ class TestBucket( unittest.TestCase ):
         self.assertEqual( jbBucket.buckets['test']['name'], 'Payload keys' )
         self.assertEqual( len(jbBucket.buckets['test']['keys']), 2 )
 
+    # ======================================================================
+    # Bucket arithmetic minus
+    def test_bucket_minus_bucket( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "bucket clear all" )
+        jbFunc.parse( "bucket payload all" )
+        self.assertEqual( len(jbBucket.buckets['all']['keys']), 2 )
+
+        jbFunc.parse( "bucket by creator" )
+        jbFunc.parse( "bucket all - 0" )
+        self.assertEqual( len(jbBucket.buckets['all']['keys']), 1 )
+
+        jbFunc.parse( "bucket all - 1" )
+        self.assertEqual( len(jbBucket.buckets['all']['keys']), 0 )
+
 # ======================================================================
 if __name__ == '__main__':
     unittest.main()

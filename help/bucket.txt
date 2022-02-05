@@ -66,6 +66,9 @@ Manipulating buckets ...
   > bucket [id] + [from]
   Copies the contents of bucket [from] into bucket [id]. Duplicates are not preserved in the destination bucket. The [from] bucket is not modified.
 
+  > bucket [src] - [remove]
+  Removes the contents of bucket [remove] from bucket [src]. Bucket [src] must not be a numbered bucket.
+
 Alias ...
 ---------
   > bk

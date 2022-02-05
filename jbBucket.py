@@ -43,6 +43,10 @@ def bucketf( ins ):
     elif len(ins) == 3 and ins[1] == '+':
         merge( ins )
 
+    # Subtract one bucket from another
+    elif len(ins) == 3 and ins[1] == '-':
+        subtract( ins )
+
     # Look in a bucket
     elif len(ins) >= 2 and ins[0] == 'look':
         look( ins )
@@ -322,6 +326,37 @@ def merge( ins ):
             buckets[dst]["keys"].append( key )
 
     contents( dst )
+
+# ======================================================
+#  Remove the contents of one bucket from another.
+# ======================================================
+def subtract( ins ):
+    global buckets
+
+    prime = ins[0]
+    toremove = ins[2]
+
+    # Copy pre-conditions must be met.
+    if prime not in buckets:
+        jbEcho.echo( "Bucket '%s' does not exist." % prime)
+        return
+
+    if prime.isnumeric():
+        jbEcho.echo( "Numbered bucket '%s' cannot be subtracted." % prime )
+        return
+
+    if toremove not in buckets:
+        jbEcho.echo( "Bucket '%s' does not exist." % toremove )
+        return
+
+    # Do the subtraction ...
+    bk = set(buckets[prime]["keys"])
+    for key in buckets[toremove]["keys"]:
+        if key in bk:
+            bk.remove( key )
+
+    buckets[prime]["keys"]=list(bk)
+    contents( prime )
 
 # ===========================================
 #  Create buckets directly from the payload.
