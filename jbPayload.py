@@ -183,7 +183,7 @@ def completeRange( start, end, page ):
 #  Talks to jbSearch to complete the payload using Jira queries
 # ======================================================================================
 def conductQuery( startAt, maxResults ):
-    print( "loading from %s to %s" % ( startAt, startAt+maxResults ) )
+    jbEcho.echo( "loading from %s to %s" % ( startAt, startAt+maxResults ) )
 
     # Remember the current state. This shouldn't be a destructive operation.
     jbSearch.searchf( list(), starting=startAt, maxRecords=maxResults, append=True )
