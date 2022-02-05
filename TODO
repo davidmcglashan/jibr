@@ -1,5 +1,3 @@
-allow echo to change without echoing (suppress)
-
 arrays and vars
 - setting from buckets: bucket array [arr] [id] puts keys in array
 - setting from bucket names: bucket array [arr] names: makes an array of numbered bucket names (which are values from other queries)
@@ -49,8 +47,6 @@ payloads
 - jira payload - open the payload's keys in a search: key in ()
 
 things to do
-- empty epics
-- open epics with all closed stories
 - running filters
 - managing filters
 - parser to turn 'ins' into a list of strings where " has joined multiple words together, etc.
