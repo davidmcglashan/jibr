@@ -1,4 +1,5 @@
 from . import jbBucket
+from . import jbArray
 from . import jbFields
 from . import jbVar
 
@@ -22,6 +23,14 @@ def parse( ins ):
                 continue
 
             words.append( '(' + ','.join( jbBucket.buckets[bid]['keys'] ) + ')' )
+
+        # does this look like an array[] call?
+        elif word.startswith( 'array[') and word.endswith(']'):
+            aid = word[6:len(word)-1]
+            if aid not in jbArray.arrays:
+                continue
+
+            words.append( '(' + ','.join( jbArray.arrays[aid] ) + ')' )
 
         # Don't know what this word is so just include it in the query.
         else:
