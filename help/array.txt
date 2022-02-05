@@ -19,3 +19,6 @@ Usage ...
 
   > array clear all
   Removes all the arrays.
+
+  > array unique [id]
+  Removes all the duplicates from an array leaving each entry to appear only once.

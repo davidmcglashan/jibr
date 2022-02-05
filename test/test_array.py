@@ -75,6 +75,18 @@ class TestArray( unittest.TestCase ):
         jbFunc.parse( "array" )
         self.assertTrue( jbEcho.lastEcho.endswith( ": ['ABC-25', 'ABC-24']" ) )
 
+    # ======================================================================
+    # Remove the dupes
+    def test_array_unique( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array ss status" )
+
+        self.assertEqual( len(jbArray.arrays['ss']), 2 )
+        jbFunc.parse( "array unique ss" )
+        self.assertEqual( len(jbArray.arrays['ss']), 1 )
+
 # ======================================================================
 if __name__ == '__main__':
     unittest.main()

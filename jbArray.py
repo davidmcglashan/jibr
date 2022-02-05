@@ -24,6 +24,10 @@ def arrayf(ins):
     elif len(ins) == 2 and ins[0] == 'clear':
         clearf( ins )
 
+    # Get rid of duplicates
+    elif len(ins) == 2 and ins[0] == 'unique':
+        uniquef( ins[1] )
+
     # Two params is time for fishing in the payload
     elif len(ins) == 2:
         fromPayload( ins )
@@ -49,6 +53,21 @@ def clearf( ins ):
 
     elif len(ins) == 2 and ins[1] in arrays:
         arrays.pop( ins[1] )
+
+# ========================================
+#  Remove the duplicates from an array.
+# ========================================
+def uniquef( key ):
+    # No array? No dice!
+    if key not in arrays:
+        jbEcho.echo( "No array with that name: %s" % key )
+        return
+
+    vals = set()
+    vals.update( arrays[key] )
+    arrays[key] = list(vals)
+
+    displayf( key )
 
 # =====================================================================
 #  Return the value of an array or an empty list if no array is found.
