@@ -1,3 +1,4 @@
+from . import jbArray
 from . import jbBucket
 from . import jbEcho
 from . import jbPayload
@@ -66,7 +67,7 @@ def addAuthHeader( headers ):
 def jiraf( ins ):
     # No key means nothing to open.
     if len(ins) == 0:
-        jbEcho.echo( "Nothing to open", 0 )
+        jbEcho.echo( "Nothing to open" )
         return
 
     # The 'search' keyword opens a Jira search URL
@@ -86,4 +87,17 @@ def jiraf( ins ):
             return
 
         url = "https://%s:%s/issues/?jql=key in (%s)" % (hostname,port,",".join(keys))
+        jbWeb.open( url )
+
+    # The 'array' keyword opens a Jira search with the arrays's keys passed into the JQL
+    elif len(ins) == 3 and ins[0] == 'array':
+        if ins[1] not in jbArray.arrays:
+            jbEcho.echo( "Array not found: %s" % ins[1] )
+            return
+
+        arr = jbArray.arrays[ins[1]]
+        if len(arr) == 0:
+            return
+
+        url = "https://%s:%s/issues/?jql=%s in (%s)" % (hostname,port,ins[2],",".join(arr))
         jbWeb.open( url )

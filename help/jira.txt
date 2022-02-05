@@ -12,3 +12,12 @@ Usage ...
   or
   > jira ?
   Opens the last search in Jira
+
+  > jira bucket [id]
+  Opens a Jira search for the keys in the bucket with the id of [id].
+
+  > jira array [id] [field]
+  Opens a Jira search for the values in the array with the id of [id] against the field of [field]
+
+  > jira array people assignee
+  Opens a Jira search where the assignee field matches the values in the [people] array.
