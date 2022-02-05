@@ -23,7 +23,7 @@ def lookf( ins ):
 # ===================================================================
 def lookwithkeys( ins, keys=None ):
     if jbPayload.payload == None or "issues" not in jbPayload.payload:
-        jbEcho.echo( "No recent search to look at" )
+        jbEcho.echo( "No payload to look at" )
         return
 
     # If no columns were passed in then use the ones defined in select.

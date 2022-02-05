@@ -71,7 +71,11 @@
     {
         "name": "Working with variables",
         "commands": {
-            "var": "jbVar.varf"
+            "var": "jbVar.varf",
+            "array": {
+                "function": "jbArray.arrayf",
+                "alias":    "arr"
+            }
         }
     }
 ]

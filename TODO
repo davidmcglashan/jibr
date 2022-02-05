@@ -1,8 +1,4 @@
-buckets
-- bk <id> - <id> subtract one bucket from another (not numbered unless empty buckets handle gracefully)
-
 arrays and vars
-- setting from payload via field
 - setting from buckets: bucket array [arr] [id] puts keys in array
 - setting from bucket names: bucket array [arr] names: makes an array of numbered bucket names (which are values from other queries)
 - array <arr> - <arr>
@@ -32,7 +28,6 @@ vars
 
 buckets
 - bucket match <term> <var> - match exactly <term> can put the bucket id in <var>
-- bucket payload <id> - turn the bucket into the payload - short hand for '? key in bucket[id]'
 
 issue
 - issue <key> - displays a single record based on jbselect columns
@@ -51,9 +46,6 @@ payloads
 - payload [key] - show just the payload for that record
 - append with ?
 - jira payload - open the payload's keys in a search: key in ()
-
-keys command to pull keys out of payloads
-- why?
 
 things to do
 - empty epics

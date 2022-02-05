@@ -1,0 +1,21 @@
+---------------------------------------
+array ([id] ([field])|clear (all|[id]))
+---------------------------------------
+Arrays can be assigned to remember key data with multiple values. They're set from buckets and payloads.
+
+Usage ...
+---------
+  > array
+  Displays a summary of arrays and their current values.
+
+  > array [id]
+  Displays the values of the array whose id is [id].
+
+  > array [id] [field]
+  Creates a new array from the payload using the ordered values of [field].
+
+  > array clear [id]
+  Removes the array with whose id is [id].
+
+  > array clear all
+  Removes all the arrays.
