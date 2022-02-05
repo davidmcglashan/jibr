@@ -1,6 +1,4 @@
 arrays and vars
-- array <arr> - <arr>
-- array <arr> + <arr>
 - setting from buckets: bucket array [arr] [id] puts keys in array
 - setting from bucket names: bucket array [arr] names: makes an array of numbered bucket names (which are values from other queries)
 

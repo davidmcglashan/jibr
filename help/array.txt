@@ -1,5 +1,5 @@
 ---------------------------------------
-array ([id] ([field])|clear (all|[id]))
+array ([id] ([field])|clear (all|[id])|unique [id]|[id] + [id]|[id] - [id]))
 ---------------------------------------
 Arrays can be assigned to remember key data with multiple values. They're set from buckets and payloads.
 
@@ -22,3 +22,9 @@ Usage ...
 
   > array unique [id]
   Removes all the duplicates from an array leaving each entry to appear only once.
+
+  > array [id] + [src]
+  Takes the items in the array [src] and adds them to the array [id].
+
+  > array [id] - [remove]
+  Takes the items in the array [remove] and removes them from the array [id]. Array [id] also has its duplicates removed.

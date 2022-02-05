@@ -28,7 +28,15 @@ def arrayf(ins):
     elif len(ins) == 2 and ins[0] == 'unique':
         uniquef( ins[1] )
 
-    # Two params is time for fishing in the payload
+    # Concatenate two arrays
+    elif len(ins) == 3 and ins[1] == '+':
+        concatf( ins )
+
+    # Concatenate two arrays
+    elif len(ins) == 3 and ins[1] == '-':
+        subtractf( ins )
+        
+    # Otherwise it's time for fishing in the payload
     elif len(ins) == 2:
         fromPayload( ins )
 
@@ -100,4 +108,59 @@ def fromPayload( ins ):
             arr.append( result[column] )
 
     # And display the new array.
-    displayf( ins[0] ) 
+    displayf( ins[0] )
+
+# ======================================================
+#  Merge two arrays together
+# ======================================================
+def concatf( ins ):
+    global arrays
+
+    src = ins[2]
+    dst = ins[0]
+
+    # Copy pre-conditions must be met.
+    if src not in arrays:
+        jbEcho.echo( "Array '%s' does not exist." % src)
+        return
+
+    if dst not in arrays:
+        jbEcho.echo( "Array '%s' does not exist." % dst )
+        return
+
+    if src == dst:
+        jbEcho.echo( "Cannot add array '%s' to itself." % dst )
+        return
+
+    # Do the merge
+    for item in arrays[src]:
+        arrays[dst].append( item )
+
+    displayf( dst )
+
+# ======================================================
+#  Remove the contents of one array from another.
+# ======================================================
+def subtractf( ins ):
+    global arrays
+
+    prime = ins[0]
+    toremove = ins[2]
+
+    # Copy pre-conditions must be met.
+    if prime not in arrays:
+        jbEcho.echo( "Array '%s' does not exist." % prime)
+        return
+
+    if toremove not in arrays:
+        jbEcho.echo( "Bucket '%s' does not exist." % toremove )
+        return
+
+    # Do the subtraction ...
+    arr = set(arrays[prime])
+    for item in arrays[toremove]:
+        if item in arr:
+            arr.remove( item )
+
+    arrays[prime]=list(arr)
+    displayf( prime )

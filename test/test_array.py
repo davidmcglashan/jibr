@@ -87,6 +87,55 @@ class TestArray( unittest.TestCase ):
         jbFunc.parse( "array unique ss" )
         self.assertEqual( len(jbArray.arrays['ss']), 1 )
 
+    # ======================================================================
+    # Concatenate two arrays
+    def test_array_plus( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array a status" )
+        jbFunc.parse( "array b key" )
+
+        self.assertEqual( len(jbArray.arrays['a']), 2 )
+        self.assertEqual( len(jbArray.arrays['b']), 2 )
+
+        jbFunc.parse( "array a + b" )
+        self.assertEqual( len(jbArray.arrays['a']), 4 )
+        self.assertEqual( len(jbArray.arrays['b']), 2 )
+
+        jbFunc.parse( "array a + b" )
+        self.assertEqual( len(jbArray.arrays['a']), 6 )
+        self.assertEqual( len(jbArray.arrays['b']), 2 )
+
+    # ======================================================================
+    # You are not permitted to + an array to itself
+    def test_array_plus_to_itself( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array a status" )
+        self.assertEqual( len(jbArray.arrays['a']), 2 )
+
+        jbFunc.parse( "array a + a")
+        self.assertEqual( jbEcho.lastEcho, "Cannot add array 'a' to itself." )
+        self.assertEqual( len(jbArray.arrays['a']), 2 )
+
+    # ======================================================================
+    # Subtract an array from another
+    def test_array_minus( self ):
+        jbEcho.testmode()
+        jbFunc.parse( "array clear all" )
+        jbFunc.parse( "payload load test-payload" )
+        jbFunc.parse( "array a status" )
+        jbFunc.parse( "array b status" )
+
+        self.assertEqual( len(jbArray.arrays['a']), 2 )
+        self.assertEqual( len(jbArray.arrays['b']), 2 )
+
+        jbFunc.parse( "array a - b" )
+        self.assertEqual( len(jbArray.arrays['a']), 0 )
+        self.assertEqual( len(jbArray.arrays['b']), 2 )
+
 # ======================================================================
 if __name__ == '__main__':
     unittest.main()
