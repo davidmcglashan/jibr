@@ -23,6 +23,10 @@ def bucketf( ins ):
     elif ins[0] == 'by':
         by( ins )
 
+    # bucket directly from the payload
+    elif ins[0] == 'payload':
+        payload( ins )
+
     # clear the buckets
     elif ins[0] == 'clear':
         clear( ins )
@@ -318,3 +322,31 @@ def merge( ins ):
             buckets[dst]["keys"].append( key )
 
     contents( dst )
+
+# ===========================================
+#  Create buckets directly from the payload.
+# ===========================================
+def payload( ins ):
+    global buckets
+
+    bid = '0'
+
+    # Without an id in ins[1] we need to clear the numbered buckets first.
+    if len(ins) == 1:
+        removeNumberedBuckets()
+    else:
+        bid = ins[1]
+
+    # Set up the new bucket.
+    newb = dict()
+    buckets[bid] = newb
+    newb['name'] = "Payload keys"
+    keys = list()
+    newb['keys'] = keys
+
+    # Populate the new bucket by rattling through the payload
+    for issue in jbPayload.payload['issues']:
+        keys.append( issue['key'] )
+
+    # End with a display
+    display()

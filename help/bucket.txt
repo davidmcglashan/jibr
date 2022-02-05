@@ -5,19 +5,25 @@ Breaks payload results into buckets by the values of named fields. Buckets can t
 
 Buckets created from payload results are assigned numeric ids. Numbered buckets are created anew every time 'bucket by' is called.
 
-Usage ...
----------
+Creating buckets ...
+--------------------
   > bucket by [field]
   Create a new set of numbered buckets from the payload based on the value of field. The field must be present in the payload, having been included in select before the last search. A summary of the buckets is shown.
 
   > bucket by project
   Buckets the payload by the project field.
 
-  > bucket
-  Displays a summary of all the current buckets.
+  > bucket payload
+  Buckets the payload keys directly into bucket 0. All previous numbered buckets will be cleared.
+
+  > bucket payload [id]
+  Buckets the payload keys directly into a new bucket with the provided id. Other buckets are left untouched.
 
 Inspecting bucket contents ...
 ------------------------------
+  > bucket
+  Displays a summary of all the current buckets.
+
   > bucket [id]
   Displays, in a simple JSON format, the bucket name and the keys of the issues stored in the bucket whose id matches [id]
 
