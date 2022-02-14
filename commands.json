@@ -64,7 +64,8 @@
             "bucket": {
                 "function": "jbBucket.bucketf",
                 "alias":    "bk" 
-            } 
+            },
+            "worklogs": "jbWorklog.parsef"
         }
     },
 

@@ -25,7 +25,7 @@ def script(ins):
             lines = file.readlines()
     except( FileNotFoundError ):
         # We're allowed to not find 'default'
-        if ins[0] != "default" and jbEcho.level > 1:
+        if ins[0] != "default":
             jbEcho.echo( "File not found: " + filename )
             return
 
