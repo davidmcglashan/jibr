@@ -7,6 +7,10 @@
             "quit": {
                 "function": "jbFunc.quit",
                 "alias":    "q"
+            },
+            "print": {
+                "function": "jbPrint.printf",
+                "alias":    "p"
             }
         }
     },
