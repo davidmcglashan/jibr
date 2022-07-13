@@ -41,3 +41,24 @@ def lookwithkeys( ins, keys=None ):
     # Flatten the results according to the columns and return the results.
     results = jbFlatten.flattenf( jbPayload.payload, cols, keys=keys )
     return results
+
+# ===================================================================
+#  Look but with a file as the first parameter which gets the output
+# ===================================================================
+def fileLookf( ins ):
+    # Get the datas, ignoring the first parameter
+    results = lookwithkeys( ins[1:], keys=None )
+
+    # That first param is a file so dump the JSON out to there
+    filename = ins[0]
+    if '.' not in filename:
+        filename = filename + ".json"
+
+    # Read the file and parse its contents.
+    try:
+        with open( filename, 'w', encoding='utf-8' ) as file:
+            json.dump( results, file, ensure_ascii=False, indent=4 )
+
+        jbEcho.echo( "Look saved into %s" % filename )
+    except( FileNotFoundError ):
+        jbEcho.echo( "File not found: " + filename )
